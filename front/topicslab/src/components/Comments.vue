@@ -7,6 +7,7 @@
       <div class="comment-text">
         {{comment.body}}
       </div>
+      <router-link :to="`/user/${comment.user.id}`">{{comment.user.name}}</router-link>
     </Fieldset>
   </div>
 </template>
