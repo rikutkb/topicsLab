@@ -22,7 +22,10 @@ Route::post('/login', [
     App\Http\Controllers\LoginController::class,
     'login'
 ]);
-
+Route::post('/withdraw', [
+    App\Http\Controllers\UserController::class,
+    'destroy'
+]);
 Route::post('/register', [
     App\Http\Controllers\UserController::class,
     'store'
