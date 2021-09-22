@@ -7,6 +7,7 @@
       <div class="comment-text">
         {{comment.body}}
       </div>
+      <Button icon="#" label="like" class="pi pi-heart p-button-icon" v-on:click="register_comment" />
     </Fieldset>
   </div>
 </template>
@@ -16,6 +17,11 @@ export default {
   name: 'Comments',
   props: {
     comments: Array
+  },
+  methods: {
+    register_comment () {
+
+    }
   }
 }
 </script>
