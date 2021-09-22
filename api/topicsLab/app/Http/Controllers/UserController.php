@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Topic;
+use App\Models\Comment;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -53,6 +56,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user->comments = Comment::where('user_id', $user->id)->get();
+        $user->topics = Topic::where('user_id',$user->id)->get();
         return $user;
     }
 
