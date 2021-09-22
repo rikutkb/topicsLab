@@ -11,6 +11,7 @@
   <div class="content">
     <router-view/>
   </div>
+  <p><small>&copy; TopicsLab 2021</small></p>
 </template>
 
 <script>
