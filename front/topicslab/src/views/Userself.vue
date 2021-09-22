@@ -13,14 +13,27 @@
         <Button label="Withdraw" class="p-button-danger" v-on:click="withdraw" />
       </template>
     </Card>
+    <TabView>
+      <TabPanel header="topics">
+        <UserTopics :topics="user.topics" />
+      </TabPanel>
+      <TabPanel header="comments">
+        <UserComments :comments="user.comments" />
+      </TabPanel>
+    </TabView>
   </div>
 </template>
 
 <script>
 import axios from '@/supports/axios'
-
+import UserComments from '@/components/UserComments'
+import UserTopics from '@/components/UserTopics'
 export default {
   name: 'Userself',
+  components: {
+    UserComments,
+    UserTopics
+  },
   data () {
     return {
       user: {}
