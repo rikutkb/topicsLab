@@ -14,6 +14,7 @@
             <label for="password">パスワード</label>
             <InputText id="password" type="password" v-model="password" />
           </div>
+        <button onclick="location.href='Register'">新規登録はこちら</button>
         </div>
         <span style="color:red">{{message}}</span>
         <div class="p-field">
