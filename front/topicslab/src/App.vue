@@ -11,6 +11,8 @@
   <div class="content">
     <router-view/>
   </div>
+  <p>著作権表記</p>
+  <p><small>&copy; TopicsLab 2021</small></p>
 </template>
 
 <script>
