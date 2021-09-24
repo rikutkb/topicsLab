@@ -75,7 +75,7 @@ export default {
             .then(res => {
               console.log(res)
               localStorage.setItem('authenticated', 'false')
-              this.$router.push('/login')
+              this.$router.push('/')
             })
             .catch(err => {
               console.log(err)
