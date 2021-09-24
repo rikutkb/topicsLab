@@ -1,18 +1,26 @@
 <template>
   <div>
-    <Card>
-      <template #content>
-        {{user.name}}
-      </template>
-    </Card>
+    <TabView>
+      <TabPanel header="topics">
+        <UserTopics :topics="user.topics" />
+      </TabPanel>
+      <TabPanel header="comments">
+        <UserComments :comments="user.comments" />
+      </TabPanel>
+    </TabView>
   </div>
 </template>
 
 <script>
 import axios from '@/supports/axios'
-
+import UserComments from '@/components/UserComments'
+import UserTopics from '@/components/UserTopics'
 export default {
   name: 'user',
+  components: {
+    UserComments,
+    UserTopics
+  },
   data () {
     return {
       id: null,
@@ -21,7 +29,7 @@ export default {
   },
   mounted () {
     if (localStorage.getItem('authenticated') !== 'true') {
-      this.$router.push('login')
+      this.$router.push('/login')
       return
     }
 

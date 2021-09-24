@@ -22,12 +22,14 @@ Route::post('/login', [
     App\Http\Controllers\LoginController::class,
     'login'
 ]);
-
 Route::post('/register', [
     App\Http\Controllers\UserController::class,
     'store'
 ]);
-
+Route::middleware('auth:sanctum')->post('/withdraw', [
+    App\Http\Controllers\UserController::class,
+    'destroy'
+]);
 Route::post('/logout', [
     App\Http\Controllers\LoginController::class,
     'logout'

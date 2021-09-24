@@ -10,6 +10,7 @@
         </div>
       </template>
       <template #footer>
+        <Button icon="#" label="like" class="pi pi-heart p-button-icon" v-on:click="register" />
         <span>
           <router-link :to="`/user/${user.id}`">{{user.name}}</router-link>
         </span>
@@ -40,6 +41,10 @@ export default {
     }
   },
   mounted () {
+    if (localStorage.getItem('authenticated') !== 'true') {
+      this.$router.push('/login')
+      return
+    }
     this.id = this.$route.params.id
     if (!this.id) {
       alert('不正なIDです。')
@@ -47,6 +52,9 @@ export default {
     this.getTopic()
   },
   methods: {
+    register () {
+
+    },
     getTopic () {
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
