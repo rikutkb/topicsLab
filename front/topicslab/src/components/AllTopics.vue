@@ -1,19 +1,18 @@
 <template>
   <div>
-    <template v-if="topics.length">
+    <template v-if="topics.length==0">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </template>
       <Card v-for="topic in topics" :key="topic.id">
-        <template #content>
+        <div content>
           <span class="topic-date">投稿日：{{moment(topic.created_at)}}</span>
           <h2>
             <router-link :to="`/topic/${topic.id}`">
               {{topic.title}}
             </router-link>
           </h2>
-      </template>
-    </Card>
-    <template v-else><Skeleton class="p-mb-2"></Skeleton>
-    </template>
-</template>
+        </div>
+      </Card>
   </div>
 </template>
 
