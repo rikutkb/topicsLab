@@ -7,6 +7,13 @@
       <TabPanel header="comments">
         <UserComments :comments="user.comments" />
       </TabPanel>
+      <TabPanel header="info">
+        name:{{user.name}}<br>
+        <div class="fields">
+          <label for="intro">イントロ</label><br>
+          {{user.intro}}
+        </div>
+      </TabPanel>
     </TabView>
   </div>
 </template>
@@ -45,7 +52,7 @@ export default {
         .then(() => {
           axios.get(`/api/user/${this.id}`)
             .then((res) => {
-              console.log(res)
+              console.log(res.data.intro)
               if (res.status === 200) {
                 this.user = res.data
               } else {
