@@ -67,9 +67,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $user = $request->user();
+        if($request->intro != null){
+            $user->intro = $request->intro;
+        }else{
+            $user->intro = "";
+        }
+        $user->save();
+        return $user;
     }
 
     /**
@@ -90,8 +97,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $user = $request->user();
+        // Comment::where('user_id',$user->id)->delete();
+        // Topic::where('user_id',$user->id)->get()->each(function($topic){
+        //     Comment::where('topic_id',$topic->id)->delete();
+        //     $topic->delete();
+        // });
+        $user->delete();
+        return $user;
     }
 }
