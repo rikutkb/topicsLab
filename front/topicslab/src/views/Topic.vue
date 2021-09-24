@@ -16,7 +16,7 @@
         </span>
       </template>
     </Card>
-    <Comments :comments="this.comments" />
+    <Comments :comments="this.comments" :topicId="this.topic.id"/>
     <CommentForm :topicId="this.topic.id" @sentComment="receiveComment" />
   </div>
 </template>
@@ -41,6 +41,10 @@ export default {
     }
   },
   mounted () {
+    if (localStorage.getItem('authenticated') !== 'true') {
+      this.$router.push('/login')
+      return
+    }
     this.id = this.$route.params.id
     if (!this.id) {
       alert('不正なIDです。')
@@ -49,7 +53,24 @@ export default {
   },
   methods: {
     register () {
-
+      console.log('topic like')
+      axios.get('/sanctum/csrf-cookie')
+        .then(() => {
+          axios.post(`/api/topic/${this.id}/topiclike`)
+            .then((res) => {
+              if (res.status >= 200 && res.status <= 300) {
+                console.log(res)
+              } else {
+                console.log('取得失敗')
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        })
+        .catch((err) => {
+          alert(err)
+        })
     },
     getTopic () {
       axios.get('/sanctum/csrf-cookie')
