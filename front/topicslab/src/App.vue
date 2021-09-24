@@ -11,7 +11,9 @@
   <div class="content">
     <router-view/>
   </div>
-  <p><small>&copy; TopicsLab 2021</small></p>
+  <div class="chosaku">
+    <p><small>&copy; TopicsLab 2021</small></p>
+  </div>
 </template>
 
 <script>
@@ -34,7 +36,9 @@ html, body {
   height: 100%;
   min-height: 100%;
 }
-
+.chosaku p{
+    text-align: center;
+  }
 body {
   margin: 0;
   background: linear-gradient(-135deg, #E4A972, #9941D8);
