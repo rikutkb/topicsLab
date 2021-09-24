@@ -10,7 +10,7 @@
         </div>
       </template>
       <template #footer>
-        <Button icon="#" label="like" class="pi pi-heart p-button-icon" v-on:click="register" />
+        <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register"/>
         <span>
           <router-link :to="`/user/${user.id}`">{{user.name}}</router-link>
         </span>
@@ -108,5 +108,13 @@ export default {
 .p-card-footer span {
   text-align: right;
   display: block;
+}
+.topic_like_btn{
+  background: #F68;
+  border: #F68;
+}
+.topic_like_btn:hover{
+  background: #E57;
+  border: #E57;
 }
 </style>

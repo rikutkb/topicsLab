@@ -7,7 +7,7 @@
       <div class="comment-text">
         {{comment.body}}
       </div>
-      <Button icon="#" label="like" class="pi pi-heart p-button-icon" v-on:click="register_comment(comment.id)" />
+      <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register_comment(comment.id)" />
       <router-link :to="`/user/${comment.user.id}`">{{comment.user.name}}</router-link>
     </Fieldset>
   </div>
@@ -54,5 +54,14 @@ export default {
 
 .comment-text {
   white-space:pre-wrap;
+}
+
+.topic_like_btn{
+  background: #F68;
+  border: #F68;
+}
+.topic_like_btn:hover{
+  background: #E57;
+  border: #E57;
 }
 </style>
