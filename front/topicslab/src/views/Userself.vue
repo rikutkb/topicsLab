@@ -20,6 +20,17 @@
       <TabPanel header="comments">
         <UserComments :comments="user.comments" />
       </TabPanel>
+      <TabPanel header="info">
+        name:{{user.name}}<br>
+        <div class="fields">
+          <label for="intro">イントロ</label><br>
+          <InputText id="intro" type="textarea" v-model="intro" />
+        </div>
+        <div class="p-field">
+          <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
+        </div>
+
+      </TabPanel>
     </TabView>
   </div>
 </template>
@@ -36,6 +47,7 @@ export default {
   },
   data () {
     return {
+      intro: '',
       user: {}
     }
   },
@@ -50,6 +62,26 @@ export default {
   methods: {
     toNewTopic () {
       this.$router.push('topic')
+    },
+    submitIntro () {
+      axios.get('/sanctum/csrf-cookie')
+        .then(() => {
+          axios.put('/api/user', {
+            intro: this.intro
+          })
+            .then((res) => {
+              console.log(this.intro)
+              if (res.status === 200) {
+                this.user = res.data
+                console.log(this.user)
+              } else {
+                console.log('取得失敗')
+              }
+            })
+        })
+        .catch((err) => {
+          alert(err)
+        })
     },
     logout () {
       axios.get('/sanctum/csrf-cookie')
@@ -92,6 +124,7 @@ export default {
             .then((res) => {
               if (res.status === 200) {
                 this.user = res.data
+                this.intro = res.data.intro
               } else {
                 console.log('取得失敗')
               }
