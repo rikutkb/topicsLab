@@ -51,11 +51,13 @@ export default {
                 localStorage.setItem('authenticated', 'true')
               } else {
                 this.message = 'ログインに失敗しました。'
+                alert(this.message)
               }
             })
             .catch((err) => {
               console.log(err)
               this.message = 'ログインに失敗しました。'
+              alert(this.message)
             })
         })
         .catch((err) => {
