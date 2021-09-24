@@ -14,7 +14,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        return Topic::simpleAllList()->orderBy('created_at', 'DESC')->get();
+        return Topic::simpleAllList()->orderBy('created_at', 'DESC')->simplePaginate(10);
     }
 
     /**
@@ -42,6 +42,7 @@ class TopicController extends Controller
         $topic->body = $request->body;
         $topic->user()->associate($user);
         $topic->save();
+
         return $topic;
     }
 

@@ -10,6 +10,7 @@
           </h2>
         </template>
     </Card>
+    <Paginator :rows="10" :totalRecords="totalItemsCount" @page="onPage($event)"></Paginator>
   </div>
 </template>
 
@@ -36,9 +37,10 @@ export default {
         .then(() => {
           axios.get('/api/topics')
             .then((res) => {
+              console.log(res.data.data)
               if (res.status === 200) {
                 this.topics.splice(0)
-                this.topics.push(...res.data)
+                this.topics.push(...res.data.data)
               } else {
                 console.log('取得失敗')
               }
@@ -48,6 +50,10 @@ export default {
           alert(err)
         })
     }
+  },
+  onPage (event) {
+    console.log('eeee')
+    console.log(event.page)
   }
 }
 </script>

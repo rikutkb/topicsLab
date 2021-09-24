@@ -9,6 +9,7 @@ import Fieldset from 'primevue/fieldset'
 import Textarea from 'primevue/textarea'
 import TabView from 'primevue/tabview'
 import TabPanel from 'primevue/tabpanel'
+import Paginator from 'primevue/paginator'
 import 'primevue/resources/themes/saga-blue/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
@@ -35,3 +36,4 @@ app.component('Fieldset', Fieldset)
 app.component('Textarea', Textarea)
 app.component('TabView', TabView)
 app.component('TabPanel', TabPanel)
+app.component('Paginator', Paginator)
