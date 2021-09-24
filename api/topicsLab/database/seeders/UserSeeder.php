@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'intro' => 'test',
         ]);
         DB::table('users')->insert([
             'id' => '2',
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'intro' => 'test',
         ]);
         DB::table('users')->insert([
             'id' => '3',
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'intro' => 'test',
         ]);
         DB::table('users')->insert([
             'id' => '4',
@@ -48,6 +51,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+            'intro' => 'test',
         ]);
     }
 }
