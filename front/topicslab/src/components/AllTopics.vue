@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Card v-for="topic in topics" :key="topic.id">
+    <template v-if="topics.length">
+      <Card v-for="topic in topics" :key="topic.id">
         <template #content>
           <span class="topic-date">投稿日：{{moment(topic.created_at)}}</span>
           <h2>
@@ -8,8 +9,11 @@
               {{topic.title}}
             </router-link>
           </h2>
-        </template>
+      </template>
     </Card>
+    <template v-else><Skeleton class="p-mb-2"></Skeleton>
+    </template>
+</template>
   </div>
 </template>
 
