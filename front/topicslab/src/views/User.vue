@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="user===undefined||user===null">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <TabView>
       <TabPanel header="topics">
         <UserTopics :topics="user.topics" />
@@ -37,6 +40,7 @@ export default {
     if (!this.id) {
       alert('不正なIDです。')
     }
+    console.log(this.user)
     this.getUser()
   },
   methods: {
