@@ -48,6 +48,7 @@ export default {
       const password = this.password.trim()
       if (!name || !email || !password) {
         this.message = '全て必須項目です。'
+        alert(this.message)
         return
       }
 
@@ -64,11 +65,13 @@ export default {
                 this.$router.push('/login')
               } else {
                 this.message = 'ユーザー登録に失敗しました。'
+                alert(this.message)
               }
             })
             .catch((err) => {
               console.log(err)
               this.message = 'ユーザー登録に失敗しました。'
+              alert(this.message)
             })
         })
         .catch((err) => {
