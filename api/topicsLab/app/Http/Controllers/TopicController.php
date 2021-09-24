@@ -42,7 +42,6 @@ class TopicController extends Controller
         $topic->body = $request->body;
         $topic->user()->associate($user);
         $topic->save();
-
         return $topic;
     }
 

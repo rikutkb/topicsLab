@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from '@/supports/axios'
 export default {
   name: 'Comments',
   props: {

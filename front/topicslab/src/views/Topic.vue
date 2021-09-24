@@ -53,7 +53,24 @@ export default {
   },
   methods: {
     register () {
-
+      console.log('topic like')
+      axios.get('/sanctum/csrf-cookie')
+        .then(() => {
+          axios.post(`/api/topic/${this.id}/topiclike`)
+            .then((res) => {
+              if (res.status >= 200 && res.status <= 300) {
+                console.log(res)
+              } else {
+                console.log('取得失敗')
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        })
+        .catch((err) => {
+          alert(err)
+        })
     },
     getTopic () {
       axios.get('/sanctum/csrf-cookie')
