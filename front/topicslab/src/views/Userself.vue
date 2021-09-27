@@ -8,7 +8,13 @@
         マイページ
       </template>
       <template #content>
-        {{user.name}}
+        <div class="fields">
+          <label for="intro">自己紹介</label><br>
+          <InputText id="intro" type="textarea" v-model="intro" />
+        </div>
+        <div class="p-field">
+          <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
+        </div>
       </template>
       <template #footer>
         <Button label="新規トピック" v-on:click="toNewTopic" />
@@ -16,18 +22,26 @@
         <Button label="アカウント削除" class="p-button-danger" v-on:click="withdraw" />
       </template>
     </Card>
-    <UserPosts :topics="user.topics" :comments="user.comments">
-    </UserPosts>
+    <TabView>
+      <TabPanel header="トピックス">
+        <UserTopics :topics="user.topics" />
+      </TabPanel>
+      <TabPanel header="コメント">
+        <UserComments :comments="user.comments" />
+      </TabPanel>
+    </TabView>
   </div>
 </template>
 
 <script>
 import axios from '@/supports/axios'
-import UserPosts from '@/components/UserPosts'
+import UserComments from '@/components/UserComments'
+import UserTopics from '@/components/UserTopics'
 export default {
   name: 'Userself',
   components: {
-    UserPosts
+    UserComments,
+    UserTopics
   },
   data () {
     return {
