@@ -13,6 +13,7 @@
           </h2>
         </template>
     </Card>
+    <Paginator :rows="10" :totalRecords="this.totalRecords" @page="onPage($event)"></Paginator>
   </div>
 </template>
 
@@ -23,6 +24,7 @@ export default {
   name: 'AllTopics',
   data () {
     return {
+      totalRecords: Number,
       topics: [],
       isloading: true
     }
@@ -34,14 +36,36 @@ export default {
     moment: function (date) {
       return moment(date).format('YYYY/MM/DD HH:mm:SS')
     },
+    getTopicsPage (targetPage) {
+      axios.get('/sanctum/csrf-cookie')
+        .then(() => {
+          axios.get(targetPage)
+            .then((res) => {
+              this.topics = []
+              if (res.status === 200) {
+                this.topics.splice(0)
+                this.topics.push(...res.data.data)
+                this.totalRecords = res.data.total
+              } else {
+                console.log('取得失敗')
+              }
+            })
+        })
+        .catch((err) => {
+          alert(err)
+        })
+    },
     getAllTopics () {
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
           axios.get('/api/topics')
             .then((res) => {
+              console.log(res.data)
+              console.log(res.data.data)
               if (res.status === 200) {
                 this.topics.splice(0)
-                this.topics.push(...res.data)
+                this.topics.push(...res.data.data)
+                this.totalRecords = res.data.total
                 this.isloading = false
               } else {
                 console.log('取得失敗')
@@ -51,8 +75,12 @@ export default {
         .catch((err) => {
           alert(err)
         })
+    },
+    onPage (event) {
+      this.getTopicsPage(`/api/topics?page=${event.page + 1}`)
     }
   }
+
 }
 </script>
 
