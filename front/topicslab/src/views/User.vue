@@ -1,16 +1,16 @@
 <template>
   <div>
     <TabView>
-      <TabPanel header="topics">
+      <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
       </TabPanel>
-      <TabPanel header="comments">
+      <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
       </TabPanel>
-      <TabPanel header="info">
+      <TabPanel header="インフォ">
         name:{{user.name}}<br>
         <div class="fields">
-          <label for="intro">イントロ</label><br>
+          <label for="intro">自己紹介</label><br>
           {{user.intro}}
         </div>
       </TabPanel>

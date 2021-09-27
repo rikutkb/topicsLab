@@ -49,10 +49,12 @@ export default {
       const title = this.title.trim()
       if (!title) {
         this.messages.title = '未記入(空白のみ)は送信できません。'
+        alert(this.messages.title)
       }
       const body = this.body.trim()
       if (!body) {
         this.messages.body = '未記入(空白のみ)は送信できません。'
+        alert(this.messages.title)
       }
 
       if (!title || !body) return
@@ -68,11 +70,13 @@ export default {
               //
               } else {
                 this.messages.submit = '送信に失敗しました。'
+                alert(this.messages.submit)
               }
             })
             .catch((err) => {
               console.log(err)
               this.messages.submit = '送信に失敗しました。'
+              alert(this.messages.submit)
             })
         })
         .catch((err) => {
