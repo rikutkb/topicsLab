@@ -30,6 +30,10 @@ Route::middleware('auth:sanctum')->post('/withdraw', [
     App\Http\Controllers\UserController::class,
     'destroy'
 ]);
+Route::middleware('auth:sanctum')->put('/user', [
+    App\Http\Controllers\UserController::class,
+    'edit'
+]);
 Route::post('/logout', [
     App\Http\Controllers\LoginController::class,
     'logout'

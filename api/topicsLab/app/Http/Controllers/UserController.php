@@ -67,9 +67,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $user = $request->user();
+        if($request->intro != null){
+            $user->intro = $request->intro;
+        }else{
+            $user->intro = "";
+        }
+        $user->save();
+        return $user;
     }
 
     /**
