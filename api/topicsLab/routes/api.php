@@ -22,12 +22,18 @@ Route::post('/login', [
     App\Http\Controllers\LoginController::class,
     'login'
 ]);
-
 Route::post('/register', [
     App\Http\Controllers\UserController::class,
     'store'
 ]);
-
+Route::middleware('auth:sanctum')->post('/withdraw', [
+    App\Http\Controllers\UserController::class,
+    'destroy'
+]);
+Route::middleware('auth:sanctum')->put('/user', [
+    App\Http\Controllers\UserController::class,
+    'edit'
+]);
 Route::post('/logout', [
     App\Http\Controllers\LoginController::class,
     'logout'
@@ -42,7 +48,14 @@ Route::middleware('auth:sanctum')->get('/topic/{topic}', [
     App\Http\Controllers\TopicController::class,
     'show'
 ]);
-
+Route::middleware('auth:sanctum')->post('/topic/{topic}/topiclike', [
+    App\Http\Controllers\TopicLikeController::class,
+    'store'
+]);
+Route::middleware('auth:sanctum')->post('/topic/{topic}/comment/{comment}', [
+    App\Http\Controllers\CommentLikeController::class,
+    'store'
+]);
 Route::middleware('auth:sanctum')->post('/comment', [
     App\Http\Controllers\CommentController::class,
     'store'

@@ -14,11 +14,12 @@
             <label for="password">パスワード</label>
             <InputText id="password" type="password" v-model="password" />
           </div>
-        <button onclick="location.href='Register'">新規登録はこちら</button>
-        </div>
+        <!--<button onclick="location.href='Register'">新規登録はこちら</button>-->
         <span style="color:red">{{message}}</span>
         <div class="p-field">
-          <Button icon="pi pi-check" label="Login" v-on:click="login" />
+          <Button icon="pi pi-check" label="ログイン" v-on:click="login" />
+          <Button label="新規登録はこちら" onclick="location.href='Register'" class="p-button p-component p-button-secondary" type="button" style="margin-top:8px;" />
+        </div>
         </div>
       </template>
     </Card>
@@ -52,11 +53,13 @@ export default {
                 localStorage.setItem('authenticated', 'true')
               } else {
                 this.message = 'ログインに失敗しました。'
+                alert(this.message)
               }
             })
             .catch((err) => {
               console.log(err)
               this.message = 'ログインに失敗しました。'
+              alert(this.message)
             })
         })
         .catch((err) => {

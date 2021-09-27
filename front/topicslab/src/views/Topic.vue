@@ -1,22 +1,25 @@
 <template>
   <div>
+    <div v-if="isloading">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <Card>
       <template #title>
         {{topic.title}}
       </template>
       <template #content>
         <div class="body-text">
-          {{topic.body}}
+          {{topic.body}}{{topic.topic_likes_count}}
         </div>
       </template>
       <template #footer>
-        <Button icon="#" label="like" class="pi pi-heart p-button-icon" v-on:click="register" />
+        <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register"/>
         <span>
           <router-link :to="`/user/${user.id}`">{{user.name}}</router-link>
         </span>
       </template>
     </Card>
-    <Comments :comments="this.comments" />
+    <Comments :comments="this.comments" :topicId="this.topic.id"/>
     <CommentForm :topicId="this.topic.id" @sentComment="receiveComment" />
   </div>
 </template>
@@ -37,10 +40,15 @@ export default {
       topic: {},
       user: {},
       comments: [],
-      id: null
+      id: null,
+      isloading: true
     }
   },
   mounted () {
+    if (localStorage.getItem('authenticated') !== 'true') {
+      this.$router.push('/login')
+      return
+    }
     this.id = this.$route.params.id
     if (!this.id) {
       alert('不正なIDです。')
@@ -49,18 +57,37 @@ export default {
   },
   methods: {
     register () {
-
+      console.log('topic like')
+      axios.get('/sanctum/csrf-cookie')
+        .then(() => {
+          axios.post(`/api/topic/${this.id}/topiclike`)
+            .then((res) => {
+              if (res.status >= 200 && res.status <= 300) {
+                console.log(res)
+              } else {
+                console.log('取得失敗')
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        })
+        .catch((err) => {
+          alert(err)
+        })
     },
     getTopic () {
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
           axios.get(`/api/topic/${this.id}`)
             .then((res) => {
+              console.log(res.data)
               if (res.status === 200 && res.data.length === 1) {
                 this.topic = res.data[0]
                 this.user = this.topic.user
                 this.comments.splice(0)
                 this.comments.push(...this.topic.comments)
+                this.isloading = false
               } else {
                 console.log('取得失敗')
               }
@@ -87,5 +114,13 @@ export default {
 .p-card-footer span {
   text-align: right;
   display: block;
+}
+.topic_like_btn{
+  background: #F68;
+  border: #F68;
+}
+.topic_like_btn:hover{
+  background: #E57;
+  border: #E57;
 }
 </style>
