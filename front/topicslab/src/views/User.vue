@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="user===undefined||user===null">
+    <div v-if="isloading">
       <Skeleton class="p-mb-2"></Skeleton>
     </div>
     <TabView>
@@ -27,7 +27,8 @@ export default {
   data () {
     return {
       id: null,
-      user: {}
+      user: {},
+      isloading: true
     }
   },
   mounted () {
@@ -52,6 +53,7 @@ export default {
               console.log(res)
               if (res.status === 200) {
                 this.user = res.data
+                this.isloading = false
               } else {
                 console.log('取得失敗')
               }

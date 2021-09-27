@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="getUser.length==0">
+    <div v-if="isloading">
       <Skeleton class="p-mb-2"></Skeleton>
     </div>
     <Card>
@@ -39,7 +39,8 @@ export default {
   },
   data () {
     return {
-      user: {}
+      user: {},
+      isloading: true
     }
   },
   mounted () {
@@ -95,6 +96,7 @@ export default {
             .then((res) => {
               if (res.status === 200) {
                 this.user = res.data
+                this.isloading = false
               } else {
                 console.log('取得失敗')
               }
