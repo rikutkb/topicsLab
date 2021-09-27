@@ -3,33 +3,18 @@
     <div v-if="isloading">
       <Skeleton class="p-mb-2"></Skeleton>
     </div>
-    <TabView>
-      <TabPanel header="トピックス">
-        <UserTopics :topics="user.topics" />
-      </TabPanel>
-      <TabPanel header="コメント">
-        <UserComments :comments="user.comments" />
-      </TabPanel>
-      <TabPanel header="インフォ">
-        name:{{user.name}}<br>
-        <div class="fields">
-          <label for="intro">自己紹介</label><br>
-          {{user.intro}}
-        </div>
-      </TabPanel>
-    </TabView>
+    <UserPosts :topics="user.topics" :comments="user.comments">
+    </UserPosts>
   </div>
 </template>
 
 <script>
 import axios from '@/supports/axios'
-import UserComments from '@/components/UserComments'
-import UserTopics from '@/components/UserTopics'
+import UserPosts from '@/components/UserPosts'
 export default {
   name: 'user',
   components: {
-    UserComments,
-    UserTopics
+    UserPosts
   },
   data () {
     return {
