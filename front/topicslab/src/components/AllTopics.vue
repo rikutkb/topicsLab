@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="isloading">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <Card v-for="topic in topics" :key="topic.id">
         <template #content>
           <span class="topic-date">投稿日：{{moment(topic.created_at)}}</span>
@@ -16,12 +19,12 @@
 <script>
 import axios from '@/supports/axios'
 import moment from 'moment'
-
 export default {
   name: 'AllTopics',
   data () {
     return {
-      topics: []
+      topics: [],
+      isloading: true
     }
   },
   mounted () {
@@ -39,6 +42,7 @@ export default {
               if (res.status === 200) {
                 this.topics.splice(0)
                 this.topics.push(...res.data)
+                this.isloading = false
               } else {
                 console.log('取得失敗')
               }
