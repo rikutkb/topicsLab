@@ -100,11 +100,11 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $user = $request->user();
-        // Comment::where('user_id',$user->id)->delete();
-        // Topic::where('user_id',$user->id)->get()->each(function($topic){
-        //     Comment::where('topic_id',$topic->id)->delete();
-        //     $topic->delete();
-        // });
+        Comment::where('user_id',$user->id)->delete();
+        Topic::where('user_id',$user->id)->get()->each(function($topic){
+            Comment::where('topic_id',$topic->id)->delete();
+            $topic->delete();
+        });
         $user->delete();
         return $user;
     }
