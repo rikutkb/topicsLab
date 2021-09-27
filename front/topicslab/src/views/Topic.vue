@@ -14,6 +14,9 @@
         <span>
           <router-link :to="`/user/${user.id}`">{{user.name}}</router-link>
         </span>
+        <div class="topic-like">
+          いいね数{{topic_likes_count}}
+        </div>
       </template>
     </Card>
     <Comments :comments="this.comments" :topicId="this.topic.id"/>
@@ -37,7 +40,8 @@ export default {
       topic: {},
       user: {},
       comments: [],
-      id: null
+      id: null,
+      topic_likes_count: null
     }
   },
   mounted () {
@@ -83,6 +87,7 @@ export default {
                 this.user = this.topic.user
                 this.comments.splice(0)
                 this.comments.push(...this.topic.comments)
+                this.topic_likes_count = this.topic.topic_likes_count
               } else {
                 console.log('取得失敗')
               }
