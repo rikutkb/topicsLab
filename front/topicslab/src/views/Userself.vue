@@ -122,6 +122,7 @@ export default {
           axios.get('/api/user')
             .then((res) => {
               if (res.status === 200) {
+                console.log(res.data)
                 this.user = res.data
                 this.isloading = false
                 this.intro = res.data.intro
