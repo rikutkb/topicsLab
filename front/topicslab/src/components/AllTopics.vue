@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="topics.length==0">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <Card v-for="topic in topics" :key="topic.id">
         <template #content>
           <span class="topic-date">投稿日：{{moment(topic.created_at)}}</span>

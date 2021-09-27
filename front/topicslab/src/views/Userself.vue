@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="getUser.length==0">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <Card>
       <template #title>
         マイページ
