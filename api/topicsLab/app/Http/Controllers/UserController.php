@@ -16,6 +16,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function mypage(Request $request)
+    {
+        $user = $request->user();
+        $user->comments = Comment::where('user_id', $user->id)->get();
+        $user->topics = Topic::where('user_id',$user->id)->get();
+        return $user;
+    }
     public function index()
     {
         //
@@ -44,7 +51,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-
         return $user;
     }
 
