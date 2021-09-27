@@ -70,3 +70,8 @@ Route::middleware('auth:sanctum')->get('/user/{user}', [
     App\Http\Controllers\UserController::class,
     'show'
 ]);
+Route::middleware('auth:sanctum')->get('/user/{user}/summary', [
+    App\Http\Controllers\UserController::class,
+    'summary'
+]);
+

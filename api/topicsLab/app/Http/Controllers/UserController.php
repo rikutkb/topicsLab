@@ -60,7 +60,12 @@ class UserController extends Controller
         $user->topics = Topic::where('user_id',$user->id)->get();
         return $user;
     }
-
+    public function summary(User $user)
+    {
+        $user->topics_num = $user->withCount('topics')->count();
+        $user->comments_num = $user->withCount('comments')->count();
+        return $user;
+    }
     /**
      * Show the form for editing the specified resource.
      *
