@@ -1,14 +1,13 @@
 <template>
   <div>
-    <div v-if="isloading">
-      <Skeleton class="p-mb-2"></Skeleton>
-    </div>
     <TabView>
       <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
+        <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
       <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
+        <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
       <TabPanel header="インフォ">
         name:{{user.name}}<br>

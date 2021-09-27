@@ -1,14 +1,12 @@
 <template>
   <div>
-    <div v-if="isloading">
-      <Skeleton class="p-mb-2"></Skeleton>
-    </div>
     <Card>
       <template #title>
         マイページ
       </template>
-      <template #content>
+      <template #content id="username">
         {{user.name}}
+        <div v-if="isloading"><Skeleton width="30%" height="20px" class="p-mb-2"></Skeleton></div>
       </template>
       <template #footer>
         <Button label="新規トピック" v-on:click="toNewTopic" />
@@ -19,9 +17,11 @@
     <TabView>
       <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
+        <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
       <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
+        <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
       <TabPanel header="インフォ">
         名前:{{user.name}}<br>
