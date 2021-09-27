@@ -8,6 +8,7 @@
         マイページ
       </template>
       <template #content>
+        {{user.name}}
         <div class="fields">
           <label for="intro">自己紹介</label><br>
           <InputText id="intro" type="textarea" v-model="intro" />
