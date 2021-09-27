@@ -18,16 +18,16 @@
         </div>
       </template>
       <template #footer>
-        <Button label="新規トピック" v-on:click="toNewTopic" />
-        <Button label="ログアウト" class="p-button-warning" v-on:click="logout" />
-        <Button label="アカウント削除" class="p-button-danger" v-on:click="withdraw" />
+        <Button label="Create Topic" v-on:click="toNewTopic" />
+        <Button label="Logout" class="p-button-warning" v-on:click="logout" />
+        <Button label="Withdraw" class="p-button-danger" v-on:click="withdraw" />
       </template>
     </Card>
     <TabView>
-      <TabPanel header="トピックス">
+      <TabPanel header="topics">
         <UserTopics :topics="user.topics" />
       </TabPanel>
-      <TabPanel header="コメント">
+      <TabPanel header="comments">
         <UserComments :comments="user.comments" />
       </TabPanel>
     </TabView>
@@ -62,26 +62,6 @@ export default {
   methods: {
     toNewTopic () {
       this.$router.push('topic')
-    },
-    submitIntro () {
-      axios.get('/sanctum/csrf-cookie')
-        .then(() => {
-          axios.put('/api/user', {
-            intro: this.intro
-          })
-            .then((res) => {
-              console.log(this.intro)
-              if (res.status === 200) {
-                this.user = res.data
-                console.log(this.user)
-              } else {
-                console.log('取得失敗')
-              }
-            })
-        })
-        .catch((err) => {
-          alert(err)
-        })
     },
     logout () {
       axios.get('/sanctum/csrf-cookie')
