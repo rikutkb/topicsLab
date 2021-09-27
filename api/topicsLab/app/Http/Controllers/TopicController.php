@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topic;
+use App\Models\Comment;
 use App\Models\TopicLike;
 use App\Models\CommentLike;
 use Illuminate\Http\Request;
@@ -56,7 +57,9 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        $topic = Topic::withCount('topic_likes')->where('id', $topic->id)->with('user', 'comments.user','comments.comment_likes')->get();
+        $topic = Topic::withCount('topic_likes')->where('id', $topic->id)->with('user', 'comments.user')->withCount(['comments'=>function($comment){
+            $comment->withCount('comment_likes');
+        }])->get();
         return $topic;
     }
     /**
