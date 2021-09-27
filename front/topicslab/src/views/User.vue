@@ -1,5 +1,23 @@
 <template>
   <div>
+    <div v-if="isloading">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
+    <Card>
+      <template #header>
+          <img alt="user header" src="demo/images/usercard.png">
+      </template>
+      <template #title>
+          {{user.name}}のページ
+      </template>
+      <template #content>
+        <div class="fields">
+          <label for="name">名前:</label>{{user.name}}<br>
+          <label for="intro">自己紹介:</label><br>
+          {{user.intro}}
+        </div>
+      </template>
+    </Card>
     <TabView>
       <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
@@ -8,13 +26,6 @@
       <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
         <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
-      </TabPanel>
-      <TabPanel header="インフォ">
-        name:{{user.name}}<br>
-        <div class="fields">
-          <label for="intro">自己紹介</label><br>
-          {{user.intro}}
-        </div>
       </TabPanel>
     </TabView>
   </div>
