@@ -8,22 +8,22 @@
         {{user.name}}
       </template>
       <template #footer>
-        <Button label="Create Topic" v-on:click="toNewTopic" />
-        <Button label="Logout" class="p-button-warning" v-on:click="logout" />
-        <Button label="Withdraw" class="p-button-danger" v-on:click="withdraw" />
+        <Button label="新規トピック" v-on:click="toNewTopic" />
+        <Button label="ログアウト" class="p-button-warning" v-on:click="logout" />
+        <Button label="アカウント削除" class="p-button-danger" v-on:click="withdraw" />
       </template>
     </Card>
     <TabView>
-      <TabPanel header="topics">
+      <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
       </TabPanel>
-      <TabPanel header="comments">
+      <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
       </TabPanel>
-      <TabPanel header="info">
-        name:{{user.name}}<br>
+      <TabPanel header="インフォ">
+        名前:{{user.name}}<br>
         <div class="fields">
-          <label for="intro">イントロ</label><br>
+          <label for="intro">自己紹介</label><br>
           <InputText id="intro" type="textarea" v-model="intro" />
         </div>
         <div class="p-field">
