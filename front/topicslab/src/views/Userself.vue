@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="isloading">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <Card>
       <template #title>
         マイページ
@@ -8,17 +11,28 @@
         {{user.name}}
       </template>
       <template #footer>
-        <Button label="Create Topic" v-on:click="toNewTopic" />
-        <Button label="Logout" class="p-button-warning" v-on:click="logout" />
-        <Button label="Withdraw" class="p-button-danger" v-on:click="withdraw" />
+        <Button label="新規トピック" v-on:click="toNewTopic" />
+        <Button label="ログアウト" class="p-button-warning" v-on:click="logout" />
+        <Button label="アカウント削除" class="p-button-danger" v-on:click="withdraw" />
       </template>
     </Card>
     <TabView>
-      <TabPanel header="topics">
+      <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
       </TabPanel>
-      <TabPanel header="comments">
+      <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
+      </TabPanel>
+      <TabPanel header="インフォ">
+        名前:{{user.name}}<br>
+        <div class="fields">
+          <label for="intro">自己紹介</label><br>
+          <InputText id="intro" type="textarea" v-model="intro" />
+        </div>
+        <div class="p-field">
+          <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
+        </div>
+
       </TabPanel>
     </TabView>
   </div>
@@ -36,7 +50,11 @@ export default {
   },
   data () {
     return {
-      user: {}
+
+      user: {},
+      isloading: true,
+      intro: ''
+
     }
   },
   mounted () {
@@ -50,6 +68,26 @@ export default {
   methods: {
     toNewTopic () {
       this.$router.push('topic')
+    },
+    submitIntro () {
+      axios.get('/sanctum/csrf-cookie')
+        .then(() => {
+          axios.put('/api/user', {
+            intro: this.intro
+          })
+            .then((res) => {
+              console.log(this.intro)
+              if (res.status === 200) {
+                this.user = res.data
+                console.log(this.user)
+              } else {
+                console.log('取得失敗')
+              }
+            })
+        })
+        .catch((err) => {
+          alert(err)
+        })
     },
     logout () {
       axios.get('/sanctum/csrf-cookie')
@@ -92,6 +130,8 @@ export default {
             .then((res) => {
               if (res.status === 200) {
                 this.user = res.data
+                this.isloading = false
+                this.intro = res.data.intro
               } else {
                 console.log('取得失敗')
               }

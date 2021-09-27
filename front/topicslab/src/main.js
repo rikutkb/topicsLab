@@ -10,6 +10,7 @@ import Textarea from 'primevue/textarea'
 import TabView from 'primevue/tabview'
 import TabPanel from 'primevue/tabpanel'
 import Paginator from 'primevue/paginator'
+import Skeleton from 'primevue/skeleton'
 import 'primevue/resources/themes/saga-blue/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
@@ -37,3 +38,4 @@ app.component('Textarea', Textarea)
 app.component('TabView', TabView)
 app.component('TabPanel', TabPanel)
 app.component('Paginator', Paginator)
+app.component('Skeleton', Skeleton)
