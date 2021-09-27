@@ -8,7 +8,13 @@
         マイページ
       </template>
       <template #content>
-        {{user.name}}
+        <div class="fields">
+          <label for="intro">自己紹介</label><br>
+          <InputText id="intro" type="textarea" v-model="intro" />
+        </div>
+        <div class="p-field">
+          <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
+        </div>
       </template>
       <template #footer>
         <Button label="新規トピック" v-on:click="toNewTopic" />
@@ -22,17 +28,6 @@
       </TabPanel>
       <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
-      </TabPanel>
-      <TabPanel header="インフォ">
-        名前:{{user.name}}<br>
-        <div class="fields">
-          <label for="intro">自己紹介</label><br>
-          <InputText id="intro" type="textarea" v-model="intro" />
-        </div>
-        <div class="p-field">
-          <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
-        </div>
-
       </TabPanel>
     </TabView>
   </div>
@@ -50,11 +45,9 @@ export default {
   },
   data () {
     return {
-
       user: {},
       isloading: true,
       intro: ''
-
     }
   },
   mounted () {
@@ -129,6 +122,7 @@ export default {
           axios.get('/api/user')
             .then((res) => {
               if (res.status === 200) {
+                console.log(res.data)
                 this.user = res.data
                 this.isloading = false
                 this.intro = res.data.intro
