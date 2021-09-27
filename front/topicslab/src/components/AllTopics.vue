@@ -10,7 +10,7 @@
           </h2>
         </template>
     </Card>
-    <Paginator :rows="10" :totalRecords="this.totalRecords" :template="FirstPageLink" @page="onPage($event)"></Paginator>
+    <Paginator :rows="10" :totalRecords="this.totalRecords" @page="onPage($event)"></Paginator>
   </div>
 </template>
 
