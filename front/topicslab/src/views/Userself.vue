@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="isloading">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <Card>
       <template #title>
         マイページ
@@ -47,8 +50,11 @@ export default {
   },
   data () {
     return {
+
+      user: {},
+      isloading: true,
       intro: '',
-      user: {}
+
     }
   },
   mounted () {
@@ -124,7 +130,10 @@ export default {
             .then((res) => {
               if (res.status === 200) {
                 this.user = res.data
+
+                this.isloading = false
                 this.intro = res.data.intro
+
               } else {
                 console.log('取得失敗')
               }

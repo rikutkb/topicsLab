@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="isloading">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <TabView>
       <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
@@ -31,7 +34,8 @@ export default {
   data () {
     return {
       id: null,
-      user: {}
+      user: {},
+      isloading: true
     }
   },
   mounted () {
@@ -44,6 +48,7 @@ export default {
     if (!this.id) {
       alert('不正なIDです。')
     }
+    console.log(this.user)
     this.getUser()
   },
   methods: {
@@ -55,6 +60,7 @@ export default {
               console.log(res.data.intro)
               if (res.status === 200) {
                 this.user = res.data
+                this.isloading = false
               } else {
                 console.log('取得失敗')
               }

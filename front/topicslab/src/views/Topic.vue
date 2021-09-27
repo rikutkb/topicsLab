@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="isloading">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <Card>
       <template #title>
         {{topic.title}}
@@ -37,7 +40,8 @@ export default {
       topic: {},
       user: {},
       comments: [],
-      id: null
+      id: null,
+      isloading: true
     }
   },
   mounted () {
@@ -82,6 +86,7 @@ export default {
                 this.user = this.topic.user
                 this.comments.splice(0)
                 this.comments.push(...this.topic.comments)
+                this.isloading = false
               } else {
                 console.log('取得失敗')
               }
