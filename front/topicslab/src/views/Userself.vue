@@ -53,7 +53,7 @@ export default {
 
       user: {},
       isloading: true,
-      intro: '',
+      intro: ''
 
     }
   },
@@ -130,10 +130,8 @@ export default {
             .then((res) => {
               if (res.status === 200) {
                 this.user = res.data
-
                 this.isloading = false
                 this.intro = res.data.intro
-
               } else {
                 console.log('取得失敗')
               }
