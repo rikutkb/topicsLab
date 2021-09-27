@@ -77,6 +77,7 @@ export default {
         .then(() => {
           axios.get(`/api/topic/${this.id}`)
             .then((res) => {
+              console.log(res.data)
               if (res.status === 200 && res.data.length === 1) {
                 this.topic = res.data[0]
                 this.user = this.topic.user

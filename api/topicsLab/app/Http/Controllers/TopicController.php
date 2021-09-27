@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topic;
+use App\Models\TopicLike;
+use App\Models\CommentLike;
 use Illuminate\Http\Request;
 
 class TopicController extends Controller
@@ -14,7 +16,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        return Topic::simpleAllList()->orderBy('created_at', 'DESC')->get();
+        return Topic::simpleAllList()->orderBy('created_at', 'DESC')->paginate(10);
     }
 
     /**
@@ -42,6 +44,7 @@ class TopicController extends Controller
         $topic->body = $request->body;
         $topic->user()->associate($user);
         $topic->save();
+
         return $topic;
     }
 
@@ -53,9 +56,9 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        return Topic::where('id', $topic->id)->with('user', 'comments.user')->get();
+        $topic = Topic::withCount('topic_likes')->where('id', $topic->id)->with('user', 'comments.user','comments.comment_likes')->get();
+        return $topic;
     }
-
     /**
      * Show the form for editing the specified resource.
      *
