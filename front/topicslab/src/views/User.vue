@@ -1,15 +1,15 @@
 <template>
   <div>
     <Card>
-      <template #header>
-          <img alt="user header" src="http://localhost:8000/default.png">
-      </template>
       <template #title>
         <Skeleton width="30%" height="30px" class="p-mb-2 skeleton_inline" v-if="isloading"></Skeleton>{{user.name}}のページ
       </template>-->
       <template #content>
         <!--<img alt="user header" src="demo/images/usercard.png">-->
-        <div class="dummy_img">aaa</div>
+        <div class="user_img" v-if="user.img_path">
+        <img :src= "'http://localhost:8000/' + user.img_path" :width="150" />
+        </div>
+        <div v-else class="dummy_img">aaa</div>
           <span class="u_name">{{user.name}}</span>
           <Skeleton width="20%" height="30px" class="p-mb-2 skeleton_inline" v-if="isloading"></Skeleton><br>
           <Skeleton width="63%" height="20px" class="p-mb-2 skeleton_block" v-if="isloading"></Skeleton>
@@ -106,13 +106,17 @@ Skeleton{
 .skeleton_block{
   margin-bottom: 5px;
 }
-
+.user_img{
+  float:left;
+  margin:0px 30px 0px 0px;
+}
 /*画像の代わり*/
 .dummy_img{
   float:left;
   margin:0px 30px 0px 0px;
   width:150px;
   height:150px;
+  color:#aaa;
   background-color:#aaa;
 }
 /*float解除用*/
