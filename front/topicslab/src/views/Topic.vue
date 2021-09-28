@@ -14,8 +14,13 @@
       </template>
       <template #footer>
         <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register"/>
-
         <UserProfile :user="this.user" />
+        <span>
+          <router-link :to="`/user/${user.id}`">{{user.name}}</router-link>
+        </span>
+        <div class="topic-like">
+          いいね数：{{topic_likes_count}}
+        </div>
       </template>
     </Card>
     <Comments :comments="this.comments" :topicId="this.topic.id"/>
@@ -41,7 +46,8 @@ export default {
       user: {},
       comments: [],
       id: null,
-      isloading: true
+      isloading: true,
+      topic_likes_count: null
     }
   },
   mounted () {
@@ -88,6 +94,7 @@ export default {
                 this.comments.splice(0)
                 this.comments.push(...this.topic.comments)
                 this.isloading = false
+                this.topic_likes_count = this.topic.topic_likes_count
               } else {
                 console.log('取得失敗')
               }
