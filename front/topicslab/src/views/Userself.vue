@@ -10,23 +10,21 @@
         <div class="fields">
           <label for="intro">自己紹介</label><br>
           <InputText id="intro" type="textarea" v-model="intro" />
-        </div>
-        <div class="p-field">
-          <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
+          <Button label="更新" v-on:click="submitIntro" />
         </div>
       </template>
       <template #footer>
-        <Button label="Create Topic" v-on:click="toNewTopic" />
-        <Button label="Logout" class="p-button-warning" v-on:click="logout" />
-        <Button label="Withdraw" class="p-button-danger" v-on:click="withdraw" />
+        <Button label="トピック作成" v-on:click="toNewTopic" />
+        <Button label="ログアウト" class="p-button-warning" v-on:click="logout" />
+        <Button label="アカウント削除" class="p-button-danger" v-on:click="withdraw" />
       </template>
     </Card>
     <TabView>
-      <TabPanel header="topics">
+      <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
         <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
-      <TabPanel header="comments">
+      <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
         <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
