@@ -2,7 +2,8 @@
   <div>
     <Fieldset v-for="comment in comments" :key="comment.id">
       <template #legend>
-        <span>{{comment.user.name}}</span>
+        <span>{{comment.user.name}}<img v-if="comment.user.img_path" :src= "'http://localhost:8000/' + comment.user.img_path" :width="20" /></span>
+
       </template>
       <div class="comment-text">
         {{comment.body}}
