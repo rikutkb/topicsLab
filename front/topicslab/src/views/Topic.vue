@@ -3,6 +3,7 @@
     <Card>
       <template #title>
         {{topic.title}}
+        <img v-if="topic.img_path" :src= "'http://localhost:8000/' + topic.img_path" :width="20" />
         <div v-if="isloading"><Skeleton height="35px" class="p-mb-2"></Skeleton></div>
       </template>
       <template #content>

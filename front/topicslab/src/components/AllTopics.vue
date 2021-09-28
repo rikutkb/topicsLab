@@ -5,7 +5,7 @@
     </div>
     <Card v-for="topic in topics" :key="topic.id">
         <template #content>
-          <span class="topic-date">投稿日：{{moment(topic.created_at)}}</span>
+          <span class="topic-date">投稿日：{{moment(topic.created_at)}}<img v-if="topic.img_path" :src= "'http://localhost:8000/' + topic.img_path" :width="20" /></span>
           <h2>
             <router-link :to="`/topic/${topic.id}`">
               {{topic.title}}
