@@ -44,6 +44,11 @@ class TopicController extends Controller
         $topic->title = $request->title;
         $topic->body = $request->body;
         $topic->user()->associate($user);
+        if($request->hasFile('file')){
+            $filename = time() . '-' .$request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('public',$filename);
+            $topic->img_path = 'storage/' . $filename;
+        }
         $topic->save();
 
         return $topic;
