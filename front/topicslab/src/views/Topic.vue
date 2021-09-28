@@ -15,9 +15,12 @@
       </template>
       <template #footer>
         <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register"/>
-        <span>
-          <router-link :to="`/user/${user.id}`">{{user.name}}</router-link>
-        </span>
+          <div class="topic-like">
+            いいね数：{{topic_likes_count}}
+          </div>
+        <div class="userprofile">
+          <UserProfile :user="this.user" />
+        </div>
       </template>
     </Card>
     <Comments :comments="this.comments" :topicId="this.topic.id"/>
@@ -29,12 +32,13 @@
 import axios from '@/supports/axios'
 import Comments from '@/components/Comments'
 import CommentForm from '@/components/CommentForm'
-
+import UserProfile from '@/components/UserProfile'
 export default {
   name: 'Topic',
   components: {
     Comments,
-    CommentForm
+    CommentForm,
+    UserProfile
   },
   data () {
     return {
@@ -42,7 +46,8 @@ export default {
       user: {},
       comments: [],
       id: null,
-      isloading: true
+      isloading: true,
+      topic_likes_count: null
     }
   },
   mounted () {
@@ -89,6 +94,7 @@ export default {
                 this.comments.splice(0)
                 this.comments.push(...this.topic.comments)
                 this.isloading = false
+                this.topic_likes_count = this.topic.topic_likes_count
               } else {
                 console.log('取得失敗')
               }
@@ -119,9 +125,17 @@ export default {
 .topic_like_btn{
   background: #F68;
   border: #F68;
+  float: left;
 }
 .topic_like_btn:hover{
   background: #E57;
   border: #E57;
+}
+.topic-like{
+  padding-top: 10px;
+  padding-left: 120px;
+}
+.userprofile{
+  clear: both;
 }
 </style>

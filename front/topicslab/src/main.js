@@ -11,6 +11,7 @@ import TabView from 'primevue/tabview'
 import TabPanel from 'primevue/tabpanel'
 import Paginator from 'primevue/paginator'
 import Skeleton from 'primevue/skeleton'
+import OverlayPanel from 'primevue/overlaypanel'
 import 'primevue/resources/themes/saga-blue/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
@@ -39,3 +40,4 @@ app.component('TabView', TabView)
 app.component('TabPanel', TabPanel)
 app.component('Paginator', Paginator)
 app.component('Skeleton', Skeleton)
+app.component('OverlayPanel', OverlayPanel)
