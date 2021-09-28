@@ -2,7 +2,10 @@
   <div>
     <Card>
       <template #title>
+        <div id="title_top">
         マイページ
+        <Button label="ログアウト" class="p-button logout_btn" v-on:click="logout" />
+        </div>
       </template>
       <template #content id="username">
         <div class="dummy_img">aaa</div>
@@ -14,9 +17,7 @@
         <div class="blank">a</div>
       </template>
       <template #footer>
-        <Button label="トピック作成" v-on:click="toNewTopic" />
-        <Button label="ログアウト" class="p-button-warning" v-on:click="logout" />
-        <Button label="アカウント削除" class="p-button-danger" v-on:click="withdraw" />
+        <Button label="トピック作成" class="p-button create_btn" v-on:click="toNewTopic" />
       </template>
     </Card>
     <TabView>
@@ -29,6 +30,7 @@
         <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
     </TabView>
+    <Button label="アカウント削除" class="p-button withdraw_btn" v-on:click="withdraw" />
   </div>
 </template>
 
@@ -146,6 +148,7 @@ export default {
 }
 /*テキストエリアの説明*/
 .textarea_des{
+  margin-top:20px;
   font-size:13px;
 }
 /*テキストエリア*/
@@ -155,5 +158,35 @@ export default {
 /*テキストエリアの更新ボタン*/
 #intro_btn{
   height:50px;
+}
+/*ログアウトボタンを右に寄せるためのやつ*/
+#title_top{
+  display: flex;
+}
+/*ログアウトボタン*/
+.logout_btn{
+  margin-left: auto;
+  background:#bbb;
+  border-color:#bbb;
+}
+.logout_btn:hover{
+  background:#aaa;
+  border-color:#aaa;
+}
+/*トピック作成ボタン*/
+.create_btn{
+  width:100%;
+}
+/*削除ボタン*/
+.withdraw_btn{
+  width:100%;
+  height:50px;
+  color:#fff;
+  background-color:#d00;
+  border-color:#d00;
+}
+.withdraw_btn:hover{
+  background-color:#b00;
+  border-color:#b00;
 }
 </style>
