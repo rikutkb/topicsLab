@@ -57,10 +57,10 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        $topic = Topic::withCount('topic_likes')->where('id', $topic->id)->with('user', 'comments.user')->withCount(['comments'=>function($comment){
-            $comment->withCount('comment_likes');
-        }])->get();
-        return $topic;
+        $topic_obj = Topic::withCount('topic_likes')->where('id', $topic->id)->with('user')->get()->toArray();
+        $comments = Comment::withCount('comment_likes')->where('topic_id',$topic->id)->with('user')->get()->toArray();
+        $topic_obj[0]["comments"] = $comments;
+        return $topic_obj;
     }
     /**
      * Show the form for editing the specified resource.
