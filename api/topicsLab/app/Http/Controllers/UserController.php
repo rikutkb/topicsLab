@@ -81,11 +81,18 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
+
+
         $user = $request->user();
-        if($request->intro != null){
+        if($request->intro != null || $request->intro != ""){
             $user->intro = $request->intro;
-        }else{
-            $user->intro = "";
+        }
+
+        if($request->hasFile('file')){
+            $filename = time() . '-' .$request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('public',$filename);
+            $user->img_path = 'storage/' . $filename;
+
         }
         $user->save();
         return $user;

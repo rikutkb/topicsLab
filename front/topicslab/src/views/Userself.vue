@@ -10,11 +10,18 @@
       <template #content id="username">
         <div class="dummy_img">aaa</div>
         <span class="u_name">{{user.name}}</span>
-        <div v-if="isloading"><Skeleton width="30%" height="25px" class="p-mb-2"></Skeleton></div><br>
+        <div v-if="isloading">
+          <Skeleton width="30%" height="25px" class="p-mb-2"></Skeleton><br>
+        </div>
+        <div>
           <label class="textarea_des" for="intro">自己紹介</label><br>
           <InputText id="intro" type="textarea" v-model="intro" />
-          <Button id="intro_btn" label="更新" v-on:click="submitIntro" />
-        <div class="blank">a</div>
+        </div>
+        <div class="p-field">
+          <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
+        </div>
+        <input type="file" @change="getImg" />
+        <Button icon="pi pi-check" label="アップロード" v-on:click="uploadImg" />
       </template>
       <template #footer>
         <Button label="トピック作成" class="p-button create_btn" v-on:click="toNewTopic" />
@@ -48,7 +55,10 @@ export default {
     return {
       user: {},
       isloading: true,
-      intro: ''
+      intro: '',
+      confirmedImage: '',
+      file: '',
+      ImgState: false
     }
   },
   mounted () {
@@ -111,6 +121,34 @@ export default {
             })
             .catch(err => {
               console.log(err)
+            })
+        })
+        .catch((err) => {
+          alert(err)
+        })
+    },
+    getImg (e) {
+      this.file = e.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(this.file)
+      reader.onload = e => {
+        this.confirmedImage = e.target.result
+      }
+    },
+    uploadImg () {
+      const data = new FormData()
+      data.append('file', this.file)
+
+      axios.get('/sanctum/csrf-cookie')
+        .then(() => {
+          console.log('jfsdlfjsd')
+          axios.post('/api/user/profile', data)
+            .then((res) => {
+              if (res.status === 200) {
+                console.log(res.data)
+              } else {
+                console.log('取得失敗')
+              }
             })
         })
         .catch((err) => {

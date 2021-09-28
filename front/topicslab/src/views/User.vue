@@ -1,8 +1,11 @@
 <template>
   <div>
     <Card>
-      <!--<template #title>
-          <Skeleton width="30%" height="30px" class="p-mb-2 skeleton_inline" v-if="isloading"></Skeleton>{{user.name}}のページ
+      <template #header>
+          <img alt="user header" src="http://localhost:8000/default.png">
+      </template>
+      <template #title>
+        <Skeleton width="30%" height="30px" class="p-mb-2 skeleton_inline" v-if="isloading"></Skeleton>{{user.name}}のページ
       </template>-->
       <template #content>
         <!--<img alt="user header" src="demo/images/usercard.png">-->

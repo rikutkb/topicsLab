@@ -15,6 +15,7 @@
         <Textarea v-model="body" :autoResize="true" rows="10" />
         <span style="color:red">{{messages.body}}</span>
       </div>
+      <input type="file" @change="getImg" />
       <div class="p-field">
         <Button icon="pi pi-check" label="Save" v-on:click="submit" />
         <span style="color:red">{{messages.submit}}</span>
@@ -35,7 +36,9 @@ export default {
       messages: {
         submit: '',
         title: '',
-        body: ''
+        body: '',
+        file: '',
+        confirmedImage: ''
       }
     }
   },
@@ -45,9 +48,16 @@ export default {
     }
   },
   methods: {
+    getImg (e) {
+      this.file = e.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(this.file)
+      reader.onload = e => {
+        this.confirmedImage = e.target.result
+      }
+    },
     submit () {
       const title = this.title.trim()
-      this.$router.push('/')
       if (!title) {
         this.messages.title = '未記入(空白のみ)は送信できません。'
         alert(this.messages.title)
@@ -59,16 +69,16 @@ export default {
       }
 
       if (!title || !body) return
-
+      const data = new FormData()
+      data.append('file', this.file)
+      data.set('title', title)
+      data.set('body', body)
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
-          axios.post('/api/topic', {
-            title: title,
-            body: body
-          })
+          axios.post('/api/topic', data)
             .then((res) => {
               if (res.status === 201) {
-              //
+                console.log(res)
               } else {
                 this.messages.submit = '送信に失敗しました。'
                 alert(this.messages.submit)
