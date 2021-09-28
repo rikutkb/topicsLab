@@ -16,6 +16,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function mypage(Request $request)
+    {
+        $user = $request->user();
+        $user->comments = Comment::where('user_id', $user->id)->get();
+        $user->topics = Topic::where('user_id',$user->id)->get();
+        return $user;
+    }
     public function index()
     {
         //
@@ -43,8 +50,8 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->intro = "";
         $user->save();
-
         return $user;
     }
 
@@ -60,16 +67,28 @@ class UserController extends Controller
         $user->topics = Topic::where('user_id',$user->id)->get();
         return $user;
     }
-
+    public function summary(User $user)
+    {
+        $user->topics_num = $user->withCount('topics')->count();
+        $user->comments_num = $user->withCount('comments')->count();
+        return $user;
+    }
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $user = $request->user();
+        if($request->intro != null){
+            $user->intro = $request->intro;
+        }else{
+            $user->intro = "";
+        }
+        $user->save();
+        return $user;
     }
 
     /**
@@ -93,11 +112,11 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $user = $request->user();
-        // Comment::where('user_id',$user->id)->delete();
-        // Topic::where('user_id',$user->id)->get()->each(function($topic){
-        //     Comment::where('topic_id',$topic->id)->delete();
-        //     $topic->delete();
-        // });
+        Comment::where('user_id',$user->id)->delete();
+        Topic::where('user_id',$user->id)->get()->each(function($topic){
+            Comment::where('topic_id',$topic->id)->delete();
+            $topic->delete();
+        });
         $user->delete();
         return $user;
     }

@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     $user = $request->user();
+//     return $user;
+// });
+Route::middleware('auth:sanctum')->get('/user', [
+    App\Http\Controllers\UserController::class,
+    'mypage'
+]);
 Route::post('/login', [
     App\Http\Controllers\LoginController::class,
     'login'
@@ -29,6 +33,10 @@ Route::post('/register', [
 Route::middleware('auth:sanctum')->post('/withdraw', [
     App\Http\Controllers\UserController::class,
     'destroy'
+]);
+Route::middleware('auth:sanctum')->post('/user/profile', [
+    App\Http\Controllers\UserController::class,
+    'edit'
 ]);
 Route::post('/logout', [
     App\Http\Controllers\LoginController::class,
@@ -66,3 +74,8 @@ Route::middleware('auth:sanctum')->get('/user/{user}', [
     App\Http\Controllers\UserController::class,
     'show'
 ]);
+Route::middleware('auth:sanctum')->get('/user/{user}/summary', [
+    App\Http\Controllers\UserController::class,
+    'summary'
+]);
+
