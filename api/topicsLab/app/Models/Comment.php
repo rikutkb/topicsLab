@@ -18,7 +18,6 @@ class Comment extends Model
     {
         return $this->belongsTo(Topic::class);
     }
-
     public function comment_likes()
     {
         return $this->hasMany(CommentLike::class);

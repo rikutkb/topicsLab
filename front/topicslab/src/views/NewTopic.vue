@@ -47,6 +47,7 @@ export default {
   methods: {
     submit () {
       const title = this.title.trim()
+      this.$router.push('/')
       if (!title) {
         this.messages.title = '未記入(空白のみ)は送信できません。'
         alert(this.messages.title)

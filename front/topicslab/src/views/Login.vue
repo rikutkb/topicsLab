@@ -51,6 +51,7 @@ export default {
               if (res.status === 200) {
                 console.log('ログイン成功')
                 localStorage.setItem('authenticated', 'true')
+                this.$router.push('/Mypage')
               } else {
                 this.message = 'ログインに失敗しました。'
                 alert(this.message)

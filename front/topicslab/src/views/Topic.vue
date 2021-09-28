@@ -3,10 +3,13 @@
     <Card>
       <template #title>
         {{topic.title}}
+        <div v-if="isloading"><Skeleton height="35px" class="p-mb-2"></Skeleton></div>
       </template>
       <template #content>
         <div class="body-text">
-          {{topic.body}}
+          <div v-if="isloading"><Skeleton style="margin-bottom:5px;" height="20px" class="p-mb-2"></Skeleton></div>
+          <div v-if="isloading"><Skeleton height="20px" class="p-mb-2"></Skeleton></div>
+          {{topic.body}}{{topic.topic_likes_count}}
         </div>
       </template>
       <template #footer>
@@ -37,7 +40,8 @@ export default {
       topic: {},
       user: {},
       comments: [],
-      id: null
+      id: null,
+      isloading: true
     }
   },
   mounted () {
@@ -83,6 +87,7 @@ export default {
                 this.user = this.topic.user
                 this.comments.splice(0)
                 this.comments.push(...this.topic.comments)
+                this.isloading = false
               } else {
                 console.log('取得失敗')
               }

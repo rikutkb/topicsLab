@@ -1,18 +1,30 @@
 <template>
   <div>
+    <Card>
+      <template #header>
+          <img alt="user header" src="demo/images/usercard.png">
+      </template>
+      <template #title>
+          <Skeleton width="30%" height="30px" class="p-mb-2 skeleton_inline" v-if="isloading"></Skeleton>{{user.name}}のページ
+      </template>
+      <template #content>
+        <div class="fields">
+          <label for="name">名前:</label><Skeleton width="20%" height="20px" class="p-mb-2 skeleton_inline" v-if="isloading"></Skeleton>{{user.name}}<br>
+          <label for="intro">自己紹介:</label><br>
+          <Skeleton height="20px" class="p-mb-2 skeleton_block" v-if="isloading"></Skeleton>
+          <Skeleton height="20px" class="p-mb-2" v-if="isloading"></Skeleton>
+          {{user.intro}}
+        </div>
+      </template>
+    </Card>
     <TabView>
       <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
+        <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
       <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
-      </TabPanel>
-      <TabPanel header="インフォ">
-        name:{{user.name}}<br>
-        <div class="fields">
-          <label for="intro">自己紹介</label><br>
-          {{user.intro}}
-        </div>
+        <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
     </TabView>
   </div>
@@ -31,7 +43,8 @@ export default {
   data () {
     return {
       id: null,
-      user: {}
+      user: {},
+      isloading: true
     }
   },
   mounted () {
@@ -44,6 +57,7 @@ export default {
     if (!this.id) {
       alert('不正なIDです。')
     }
+    console.log(this.user)
     this.getUser()
   },
   methods: {
@@ -55,6 +69,7 @@ export default {
               console.log(res.data.intro)
               if (res.status === 200) {
                 this.user = res.data
+                this.isloading = false
               } else {
                 console.log('取得失敗')
               }
@@ -70,3 +85,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+/*名前のダミー*/
+.skeleton_inline{
+  display:inline-block;
+  margin:0px 5px;
+}
+/*自己紹介のダミー(上段)*/
+.skeleton_block{
+  margin-bottom: 5px;
+}
+</style>
