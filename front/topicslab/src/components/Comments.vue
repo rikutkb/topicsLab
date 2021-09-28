@@ -10,7 +10,7 @@
       <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register_comment(comment.id)" />
       <router-link :to="`/user/${comment.user.id}`">{{comment.user.name}}</router-link>
       <div class="comment-like">
-        いいね数:{{comment.comment_likes_count}}
+        いいね数：{{comment.comment_likes_count}}
       </div>
     </Fieldset>
   </div>

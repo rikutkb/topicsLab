@@ -18,7 +18,7 @@
           <router-link :to="`/user/${user.id}`">{{user.name}}</router-link>
         </span>
         <div class="topic-like">
-          いいね数{{topic_likes_count}}
+          いいね数：{{topic_likes_count}}
         </div>
       </template>
     </Card>
