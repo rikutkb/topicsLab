@@ -14,9 +14,8 @@
       </template>
       <template #footer>
         <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register"/>
-        <span>
-          <router-link :to="`/user/${user.id}`">{{user.name}}</router-link>
-        </span>
+
+        <UserProfile :user="this.user" />
       </template>
     </Card>
     <Comments :comments="this.comments" :topicId="this.topic.id"/>
@@ -28,12 +27,13 @@
 import axios from '@/supports/axios'
 import Comments from '@/components/Comments'
 import CommentForm from '@/components/CommentForm'
-
+import UserProfile from '@/components/UserProfile'
 export default {
   name: 'Topic',
   components: {
     Comments,
-    CommentForm
+    CommentForm,
+    UserProfile
   },
   data () {
     return {

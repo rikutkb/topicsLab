@@ -2,21 +2,24 @@
   <div>
     <Fieldset v-for="comment in comments" :key="comment.id">
       <template #legend>
-        <span>{{comment.user.name}}</span>
+        <UserProfile :user="comment.user" />
       </template>
       <div class="comment-text">
         {{comment.body}}
       </div>
       <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register_comment(comment.id)" />
-      <router-link :to="`/user/${comment.user.id}`">{{comment.user.name}}</router-link>
     </Fieldset>
   </div>
 </template>
 
 <script>
 import axios from '@/supports/axios'
+import UserProfile from '@/components/UserProfile'
 export default {
   name: 'Comments',
+  components: {
+    UserProfile
+  },
   props: {
     comments: Array,
     topicId: Number

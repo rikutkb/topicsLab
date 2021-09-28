@@ -63,6 +63,26 @@ export default {
     toNewTopic () {
       this.$router.push('topic')
     },
+    submitIntro () {
+      axios.get('/sanctum/csrf-cookie')
+        .then(() => {
+          axios.post('/api/user/profile', {
+            intro: this.intro
+          })
+            .then((res) => {
+              console.log(this.intro)
+              if (res.status === 200) {
+                this.user = res.data
+                console.log(this.user)
+              } else {
+                console.log('取得失敗')
+              }
+            })
+        })
+        .catch((err) => {
+          alert(err)
+        })
+    },
     logout () {
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
