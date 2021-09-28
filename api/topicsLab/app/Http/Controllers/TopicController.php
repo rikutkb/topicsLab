@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topic;
+use App\Models\Comment;
 use App\Models\TopicLike;
 use App\Models\CommentLike;
-use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class TopicController extends Controller
@@ -62,8 +62,10 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        $topic = Topic::withCount('topic_likes')->where('id', $topic->id)->with('user', 'comments.user')->get();
-        return $topic;
+        $topic_obj = Topic::withCount('topic_likes')->where('id', $topic->id)->with('user')->get()->toArray();
+        $comments = Comment::withCount('comment_likes')->where('topic_id',$topic->id)->with('user')->get()->toArray();
+        $topic_obj[0]["comments"] = $comments;
+        return $topic_obj;
     }
     /**
      * Show the form for editing the specified resource.

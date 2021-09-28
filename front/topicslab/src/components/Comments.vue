@@ -4,20 +4,27 @@
       <template #legend>
         <span>{{comment.user.name}}<img v-if="comment.user.img_path" :src= "'http://localhost:8000/' + comment.user.img_path" :width="20" /></span>
 
+        <UserProfile :user="comment.user" />
       </template>
       <div class="comment-text">
         {{comment.body}}
       </div>
       <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register_comment(comment.id)" />
-      <router-link :to="`/user/${comment.user.id}`">{{comment.user.name}}</router-link>
+      <div class="comment-like">
+        いいね数：{{comment.comment_likes_count}}
+      </div>
     </Fieldset>
   </div>
 </template>
 
 <script>
 import axios from '@/supports/axios'
+import UserProfile from '@/components/UserProfile'
 export default {
   name: 'Comments',
+  components: {
+    UserProfile
+  },
   props: {
     comments: Array,
     topicId: Number
@@ -60,9 +67,15 @@ export default {
 .topic_like_btn{
   background: #F68;
   border: #F68;
+  margin-top: 20px;
+  float: left;
 }
 .topic_like_btn:hover{
   background: #E57;
   border: #E57;
+}
+.comment-like {
+  padding-top: 30px;
+  padding-left: 120px;
 }
 </style>

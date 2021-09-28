@@ -49,18 +49,18 @@ export default {
           })
             .then((res) => {
               if (res.status === 200) {
-                console.log('ログイン成功')
                 localStorage.setItem('authenticated', 'true')
                 this.$router.push('/Mypage')
-              } else {
-                this.message = 'ログインに失敗しました。'
-                alert(this.message)
               }
             })
             .catch((err) => {
-              console.log(err)
-              this.message = 'ログインに失敗しました。'
-              alert(this.message)
+              if (err.response.status === 410) {
+                this.message = 'すでに削除されているユーザです。'
+                alert(this.message)
+              } else if (err.response.status === 401) {
+                this.message = 'ログインに失敗しました。'
+                alert(this.message)
+              }
             })
         })
         .catch((err) => {
