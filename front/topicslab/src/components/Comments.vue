@@ -2,9 +2,7 @@
   <div>
     <Fieldset v-for="comment in comments" :key="comment.id">
       <template #legend>
-        <span>{{comment.user.name}}<img v-if="comment.user.img_path" :src= "'http://localhost:8000/' + comment.user.img_path" :width="20" /></span>
-
-        <UserProfile :user="comment.user" />
+        <span><img v-if="comment.user.img_path" :src= "'http://localhost:8000/' + comment.user.img_path" :width="20" />{{comment.user.name}}</span>
       </template>
       <div class="comment-text">
         {{comment.body}}
@@ -13,6 +11,9 @@
       <div class="comment-like">
         いいね数：{{comment.comment_likes_count}}
       </div>
+      <div class="userprofile">
+      <UserProfile :user="comment.user" class="comment_user_icon" />
+    </div>
     </Fieldset>
   </div>
 </template>
@@ -77,5 +78,9 @@ export default {
 .comment-like {
   padding-top: 30px;
   padding-left: 120px;
+}
+.userprofile{
+  text-align: right;
+  margin-bottom:0px;
 }
 </style>
