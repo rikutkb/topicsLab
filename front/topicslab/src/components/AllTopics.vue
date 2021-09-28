@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isloading">
-      <Skeleton class="p-mb-2"></Skeleton>
+      <Skeleton height="163.17px" class="p-mb-2"></Skeleton>
     </div>
     <Card v-for="topic in topics" :key="topic.id">
         <template #content>
@@ -92,5 +92,9 @@ export default {
   .topic-date {
     font-size: 80%;
   }
+}
+/*スケルトン*/
+.p-mb-2{
+  margin-bottom: 20px;
 }
 </style>
