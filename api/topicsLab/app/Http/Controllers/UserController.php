@@ -85,10 +85,8 @@ class UserController extends Controller
         if($request->hasFile('file')){
             $filename = time() . '-' .$request->file('file')->getClientOriginalName();
             $request->file('file')->storeAs('public',$filename);
-            $user->img_path = $filename;
+            $user->img_path = 'storage/' . $filename;
 
-        }else{
-            $user->img_path = "wakaran.png";
         }
         $user->save();
         return $user;

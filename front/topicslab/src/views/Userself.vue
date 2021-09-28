@@ -113,7 +113,6 @@ export default {
     uploadImg () {
       const data = new FormData()
       data.append('file', this.file)
-      data.append('title', this.title)
 
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
