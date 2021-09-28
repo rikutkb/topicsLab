@@ -24,6 +24,6 @@ class Topic extends Model
     }
     public static function scopeSimpleAllList($query)
     {
-        return $query->select(['id', 'title', 'created_at']);
+        return $query->select(['id', 'title', 'created_at','img_path']);
     }
 }
