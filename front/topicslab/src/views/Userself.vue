@@ -16,6 +16,8 @@
         <div class="p-field">
           <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
         </div>
+        <input type="file" @change="getImg" />
+        <Button icon="pi pi-check" label="アップロード" v-on:click="uploadImg" />
       </template>
       <template #footer>
         <Button label="Create Topic" v-on:click="toNewTopic" />
@@ -48,7 +50,10 @@ export default {
     return {
       user: {},
       isloading: true,
-      intro: ''
+      intro: '',
+      confirmedImage: '',
+      file: '',
+      ImgState: false
     }
   },
   mounted () {
@@ -91,6 +96,35 @@ export default {
             })
             .catch(err => {
               console.log(err)
+            })
+        })
+        .catch((err) => {
+          alert(err)
+        })
+    },
+    getImg (e) {
+      this.file = e.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(this.file)
+      reader.onload = e => {
+        this.confirmedImage = e.target.result
+      }
+    },
+    uploadImg () {
+      const data = new FormData()
+      data.append('file', this.file)
+      data.append('title', this.title)
+
+      axios.get('/sanctum/csrf-cookie')
+        .then(() => {
+          console.log('jfsdlfjsd')
+          axios.post('/api/user/profile', data)
+            .then((res) => {
+              if (res.status === 200) {
+                console.log(res.data)
+              } else {
+                console.log('取得失敗')
+              }
             })
         })
         .catch((err) => {

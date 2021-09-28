@@ -78,16 +78,17 @@ class UserController extends Controller
 
 
         $user = $request->user();
-        if($request->intro != null){
+        if($request->intro != null || $request->intro != ""){
             $user->intro = $request->intro;
-        }else{
-            $user->intro = "";
         }
-        if($request->file != null){
-            $filename = time().'-'.request()->file->getClientOriginalName();
-            $request->file->storeAs('public',$filename);
+
+        if($request->hasFile('file')){
+            $filename = time() . '-' .$request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('public',$filename);
             $user->img_path = $filename;
 
+        }else{
+            $user->img_path = "wakaran.png";
         }
         $user->save();
         return $user;

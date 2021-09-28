@@ -5,7 +5,7 @@
     </div>
     <Card>
       <template #header>
-          <img alt="user header" src="demo/images/usercard.png">
+          <img alt="user header" src="http://localhost:8000/default.png">
       </template>
       <template #title>
           {{user.name}}のページ
