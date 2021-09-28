@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->post('/withdraw', [
     App\Http\Controllers\UserController::class,
     'destroy'
 ]);
-Route::middleware('auth:sanctum')->put('/user', [
+Route::middleware('auth:sanctum')->post('/user/profile', [
     App\Http\Controllers\UserController::class,
     'edit'
 ]);
@@ -74,3 +74,8 @@ Route::middleware('auth:sanctum')->get('/user/{user}', [
     App\Http\Controllers\UserController::class,
     'show'
 ]);
+Route::middleware('auth:sanctum')->get('/user/{user}/summary', [
+    App\Http\Controllers\UserController::class,
+    'summary'
+]);
+

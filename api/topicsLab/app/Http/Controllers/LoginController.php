@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,9 +20,16 @@ class LoginController extends Controller
                 'message' => 'success'
             ], 200);
         } else {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+            $trashed_user = User::withTrashed()->where('email',$request->email)->first();
+            if($trashed_user->trashed()){
+                return response()->json([
+                    'message' => 'すでに削除されているユーザです'],410);
+            }else{
+                return response()->json([
+                'message' => '認証できません'
+                ], 401);
+            }
+
         }
     }
 
