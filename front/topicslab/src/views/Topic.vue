@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div v-if="isloading">
-      <Skeleton class="p-mb-2"></Skeleton>
-    </div>
     <Card>
       <template #title>
         {{topic.title}}
+        <div v-if="isloading"><Skeleton height="35px" class="p-mb-2"></Skeleton></div>
       </template>
       <template #content>
         <div class="body-text">
-          {{topic.body}}
+          <div v-if="isloading"><Skeleton style="margin-bottom:5px;" height="20px" class="p-mb-2"></Skeleton></div>
+          <div v-if="isloading"><Skeleton height="20px" class="p-mb-2"></Skeleton></div>
+          {{topic.body}}{{topic.topic_likes_count}}
         </div>
       </template>
       <template #footer>
@@ -81,6 +81,7 @@ export default {
         .then(() => {
           axios.get(`/api/topic/${this.id}`)
             .then((res) => {
+              console.log(res.data)
               if (res.status === 200 && res.data.length === 1) {
                 this.topic = res.data[0]
                 this.user = this.topic.user
