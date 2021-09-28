@@ -14,12 +14,11 @@
       </template>
       <template #footer>
         <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register"/>
-        <UserProfile :user="this.user" />
-        <span>
-          <router-link :to="`/user/${user.id}`">{{user.name}}</router-link>
-        </span>
-        <div class="topic-like">
-          いいね数：{{topic_likes_count}}
+          <div class="topic-like">
+            いいね数：{{topic_likes_count}}
+          </div>
+        <div class="userprofile">
+          <UserProfile :user="this.user" />
         </div>
       </template>
     </Card>
@@ -125,9 +124,17 @@ export default {
 .topic_like_btn{
   background: #F68;
   border: #F68;
+  float: left;
 }
 .topic_like_btn:hover{
   background: #E57;
   border: #E57;
+}
+.topic-like{
+  padding-top: 10px;
+  padding-left: 120px;
+}
+.userprofile{
+  clear: both;
 }
 </style>
