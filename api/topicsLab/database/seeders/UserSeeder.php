@@ -18,7 +18,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'id' => '1',
             'name' => 'tanaka',
             'email' => 'tanaka@example.com',
             'password' => Hash::make('password'),
@@ -27,7 +26,6 @@ class UserSeeder extends Seeder
             'intro' => 'test',
         ]);
         DB::table('users')->insert([
-            'id' => '2',
             'name' => 'yamada',
             'email' => 'yamada@example.com',
             'password' => Hash::make('password'),
@@ -36,7 +34,6 @@ class UserSeeder extends Seeder
             'intro' => 'test',
         ]);
         DB::table('users')->insert([
-            'id' => '3',
             'name' => 'katou',
             'email' => 'katou@example.com',
             'password' => Hash::make('password'),
@@ -45,7 +42,6 @@ class UserSeeder extends Seeder
             'intro' => 'test',
         ]);
         DB::table('users')->insert([
-            'id' => '4',
             'name' => 'iwasaki',
             'email' => 'iwasaki@example.com',
             'password' => Hash::make('password'),
@@ -53,5 +49,18 @@ class UserSeeder extends Seeder
             'updated_at' => new DateTime(),
             'intro' => 'test',
         ]);
+
+        for($i = 1;$i<25;$i++){
+            DB::table('users')->insert([
+                'name' => 'test-'.strval($i),
+                'email' => 'test'.strval($i).'@example.com',
+                'password' => Hash::make('password'),
+                'intro' => 'test'.strval($i),
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+            ]);
+        }
+
+
     }
 }
