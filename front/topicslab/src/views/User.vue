@@ -12,12 +12,6 @@
       </template>
       <template #content>
         <div class="fields">
-          <label for="name">名前:</label>{{user.name}}<br>
-          <label for="intro">自己紹介:</label><br>
-          <Skeleton width="30%" height="30px" class="p-mb-2 skeleton_inline" v-if="isloading"></Skeleton>{{user.name}}のページ
-      </template>
-      <template #content>
-        <div class="fields">
           <label for="name">名前:</label><Skeleton width="20%" height="20px" class="p-mb-2 skeleton_inline" v-if="isloading"></Skeleton>{{user.name}}<br>
           <label for="intro">自己紹介:</label><br>
           <Skeleton height="20px" class="p-mb-2 skeleton_block" v-if="isloading"></Skeleton>
