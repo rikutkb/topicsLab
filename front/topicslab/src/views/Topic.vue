@@ -18,9 +18,13 @@
           <div class="topic-like">
             いいね数：{{topic_likes_count}}
           </div>
-        <div class="userprofile">
-          <UserProfile :user="this.user" />
-        </div>
+          <div class="user_name">
+              <div class="dummy_icon">a</div>
+              <div class="userprofile">
+                <UserProfile :user="this.user" />
+              </div>
+              <div class="blank">a</div>
+          </div>
       </template>
     </Card>
     <Comments :comments="this.comments" :topicId="this.topic.id"/>
@@ -138,5 +142,19 @@ export default {
 .userprofile{
   clear: both;
   text-align: right;
+}
+
+/*ダミーのアイコン*/
+.dummy_icon{
+  float: right;
+  width: 20px;
+  height: 20px;
+  color: #aaa;
+  background-color: #aaa;
+}
+/*floatを解除する用*/
+.blank{
+  clear: both;
+  color: #fff;
 }
 </style>
