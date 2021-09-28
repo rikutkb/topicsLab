@@ -6,6 +6,7 @@
     <Card>
       <template #title>
         {{topic.title}}
+        <img v-if="topic.img_path" :src= "'http://localhost:8000/' + topic.img_path" :width="20" />
       </template>
       <template #content>
         <div class="body-text">
