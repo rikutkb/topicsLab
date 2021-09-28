@@ -1,14 +1,12 @@
 <template>
   <div>
-    <div v-if="isloading">
-      <Skeleton class="p-mb-2"></Skeleton>
-    </div>
     <Card>
       <template #title>
         マイページ
       </template>
-      <template #content>
+      <template #content id="username">
         {{user.name}}
+        <div v-if="isloading"><Skeleton width="30%" height="20px" class="p-mb-2"></Skeleton></div>
         <div class="fields">
           <label for="intro">自己紹介</label><br>
           <InputText id="intro" type="textarea" v-model="intro" />
@@ -26,9 +24,11 @@
     <TabView>
       <TabPanel header="topics">
         <UserTopics :topics="user.topics" />
+        <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
       <TabPanel header="comments">
         <UserComments :comments="user.comments" />
+        <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
     </TabView>
   </div>
