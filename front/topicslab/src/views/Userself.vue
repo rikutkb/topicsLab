@@ -2,35 +2,35 @@
   <div>
     <Card>
       <template #title>
+        <div id="title_top">
         マイページ
+        <Button label="ログアウト" class="p-button logout_btn" v-on:click="logout" />
+        </div>
       </template>
       <template #content id="username">
-        {{user.name}}
-        <div v-if="isloading"><Skeleton width="30%" height="20px" class="p-mb-2"></Skeleton></div>
-        <div class="fields">
-          <label for="intro">自己紹介</label><br>
+        <div class="dummy_img">aaa</div>
+        <span class="u_name">{{user.name}}</span>
+        <div v-if="isloading"><Skeleton width="30%" height="25px" class="p-mb-2"></Skeleton></div><br>
+          <label class="textarea_des" for="intro">自己紹介</label><br>
           <InputText id="intro" type="textarea" v-model="intro" />
-        </div>
-        <div class="p-field">
-          <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
-        </div>
+          <Button id="intro_btn" label="更新" v-on:click="submitIntro" />
+        <div class="blank">a</div>
       </template>
       <template #footer>
-        <Button label="Create Topic" v-on:click="toNewTopic" />
-        <Button label="Logout" class="p-button-warning" v-on:click="logout" />
-        <Button label="Withdraw" class="p-button-danger" v-on:click="withdraw" />
+        <Button label="トピック作成" class="p-button create_btn" v-on:click="toNewTopic" />
       </template>
     </Card>
     <TabView>
-      <TabPanel header="topics">
+      <TabPanel header="トピックス">
         <UserTopics :topics="user.topics" />
         <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
-      <TabPanel header="comments">
+      <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
         <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
     </TabView>
+    <Button label="アカウント削除" class="p-button withdraw_btn" v-on:click="withdraw" />
   </div>
 </template>
 
@@ -145,5 +145,70 @@ export default {
   .p-button {
     margin-right: 10px;
   }
+}
+/*画像の代わり*/
+.dummy_img{
+  float:left;
+  margin:0px 30px 0px 0px;
+  width:150px;
+  height:150px;
+  background-color:#aaa;
+}
+/*float解除用*/
+.blank{
+  clear: both;
+  color:#fff;
+  font-size:1px;
+}
+/*ユーザーの名前*/
+.u_name{
+  margin-bottom:100px;
+  font-size:25px;
+  font-weight:bold;
+}
+/*テキストエリアの説明*/
+.textarea_des{
+  margin-top:20px;
+  font-size:13px;
+}
+/*テキストエリア*/
+#intro{
+  width:50%;
+  height:50px;
+  font-size:13px;
+}
+/*テキストエリアの更新ボタン*/
+#intro_btn{
+  height:50px;
+}
+/*ログアウトボタンを右に寄せるためのやつ*/
+#title_top{
+  display: flex;
+}
+/*ログアウトボタン*/
+.logout_btn{
+  margin-left: auto;
+  background:#bbb;
+  border-color:#bbb;
+}
+.logout_btn:hover{
+  background:#aaa;
+  border-color:#aaa;
+}
+/*トピック作成ボタン*/
+.create_btn{
+  width:100%;
+}
+/*削除ボタン*/
+.withdraw_btn{
+  width:100%;
+  height:50px;
+  color:#fff;
+  background-color:#d00;
+  border-color:#d00;
+}
+.withdraw_btn:hover{
+  background-color:#b00;
+  border-color:#b00;
 }
 </style>
