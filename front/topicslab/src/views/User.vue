@@ -1,11 +1,14 @@
 <template>
   <div>
+    <div v-if="isloading">
+      <Skeleton class="p-mb-2"></Skeleton>
+    </div>
     <Card>
       <template #header>
           <img alt="user header" src="demo/images/usercard.png">
       </template>
       <template #title>
-          <Skeleton width="30%" height="30px" class="p-mb-2 skeleton_inline" v-if="isloading"></Skeleton>{{user.name}}のページ
+          {{user.name}}のページ
       </template>
       <template #content>
         <div class="fields">
@@ -24,6 +27,7 @@
       </TabPanel>
       <TabPanel header="コメント">
         <UserComments :comments="user.comments" />
+
         <div v-if="isloading"><Skeleton height="163.17px" class="p-mb-2"></Skeleton></div>
       </TabPanel>
     </TabView>
