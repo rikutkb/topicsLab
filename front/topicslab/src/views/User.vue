@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div v-if="isloading">
-      <Skeleton class="p-mb-2"></Skeleton>
-    </div>
     <Card>
       <template #header>
           <img alt="user header" src="demo/images/usercard.png">

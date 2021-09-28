@@ -173,7 +173,9 @@ export default {
 }
 /*テキストエリア*/
 #intro{
+  width:50%;
   height:50px;
+  font-size:13px;
 }
 /*テキストエリアの更新ボタン*/
 #intro_btn{
