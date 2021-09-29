@@ -78,10 +78,9 @@ export default {
             intro: this.intro
           })
             .then((res) => {
-              console.log(this.intro)
               if (res.status === 200) {
                 this.user = res.data
-                console.log(this.user)
+                this.$router.go({ path: '/Mypage', force: true })
               } else {
                 alert('自己紹介を送信できませんでした。')
               }
@@ -144,11 +143,10 @@ export default {
 
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
-          console.log('jfsdlfjsd')
           axios.post('/api/user/profile', data)
             .then((res) => {
               if (res.status === 200) {
-                console.log()
+                this.$router.go({ path: '/Mypage', force: true })
               } else {
                 alert('画像送信に失敗しました。')
               }
