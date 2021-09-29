@@ -48,7 +48,7 @@ export default {
                 this.topics.push(...res.data.data)
                 this.totalRecords = res.data.total
               } else {
-                console.log('取得失敗')
+                alert('トピックが取得できませんでした。')
               }
             })
         })
@@ -69,7 +69,7 @@ export default {
                 this.totalRecords = res.data.total
                 this.isloading = false
               } else {
-                console.log('取得失敗')
+                alert('トピックが取得できませんでした。')
               }
             })
         })

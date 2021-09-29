@@ -83,7 +83,7 @@ export default {
                 this.user = res.data
                 console.log(this.user)
               } else {
-                console.log('取得失敗')
+                alert('自己紹介を送信できませんでした。')
               }
             })
         })
@@ -101,7 +101,7 @@ export default {
               this.$router.push('/login')
             })
             .catch(err => {
-              console.log(err)
+              alert(err)
             })
         })
         .catch((err) => {
@@ -118,7 +118,7 @@ export default {
               this.$router.push('/')
             })
             .catch(err => {
-              console.log(err)
+              alert(err)
             })
         })
         .catch((err) => {
@@ -143,9 +143,9 @@ export default {
           axios.post('/api/user/profile', data)
             .then((res) => {
               if (res.status === 200) {
-                console.log(res.data)
+                console.log()
               } else {
-                console.log('取得失敗')
+                alert('画像送信に失敗しました。')
               }
             })
         })
@@ -164,7 +164,7 @@ export default {
                 this.isloading = false
                 this.intro = res.data.intro
               } else {
-                console.log('取得失敗')
+                alert('取得失敗')
               }
             })
         })
