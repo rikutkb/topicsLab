@@ -3,7 +3,12 @@
         <router-link :to="`/user/${user.id}`">
         {{user.name}}
       </router-link>
+      <span class="user_img" v-if="user.img_path">
+      <img :src= "'http://localhost:8000/' + user.img_path" :width="20" />
+      </span>
+      <span v-else class="dummy_img">aaa</span>
     </p>
+
   <OverlayPanel ref="op" >
     名前:{{user.name}}<br>
     コメント数:{{user_obj.comments_num}}<br>
@@ -62,5 +67,15 @@ export default {
   .topic-date {
     font-size: 80%;
   }
+}
+
+/*画像の代わり*/
+.dummy_img{
+  float:left;
+  margin:0px 30px 0px 0px;
+  width:150px;
+  height:150px;
+  color:#aaa;
+  background-color:#aaa;
 }
 </style>

@@ -19,7 +19,6 @@
             いいね数：{{topic_likes_count}}
           </div>
           <div class="user_name">
-              <div class="dummy_icon">a</div>
               <div class="userprofile">
                 <UserProfile :user="this.user" />
               </div>
