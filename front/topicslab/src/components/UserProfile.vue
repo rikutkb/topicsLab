@@ -6,8 +6,8 @@
     </p>
   <OverlayPanel ref="op" >
     名前:{{user.name}}<br>
-    コメント数:{{user_obj.comments_num}}<br>
-    トピック数:{{user_obj.topics_num}}
+    コメント数:{{user_obj.comments_count}}<br>
+    トピック数:{{user_obj.topics_count}}
   </OverlayPanel>
 </template>
 
