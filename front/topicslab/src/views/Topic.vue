@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     register () {
-      console.log('topic like')
+      this.topic_likes_count++
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
           axios.post(`/api/topic/${this.id}/topiclike`)
