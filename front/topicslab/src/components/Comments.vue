@@ -8,11 +8,8 @@
       <div class="comment-text">
         {{comment.body}}
       </div>
-      <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register_comment(comment.id)" />
-      <div class="comment-like">
-        いいね数：{{comment.comment_likes_count}}
-      </div>
-    </Fieldset>
+      <Button icon="pi pi-heart" :label="'いいね ' + comment.comment_likes_count" class="p-button-rounded topic_like_btn" v-on:click="register_comment(comment.id)" />
+      </Fieldset>
   </div>
 </template>
 
