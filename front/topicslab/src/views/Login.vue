@@ -60,11 +60,14 @@ export default {
               } else if (err.response.status === 401) {
                 this.message = 'ログインに失敗しました。'
                 alert(this.message)
+              } else {
+                alert('サーバーエラー')
               }
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     }
   }

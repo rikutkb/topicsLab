@@ -6,8 +6,8 @@
     </p>
   <OverlayPanel ref="op" >
     名前:{{user.name}}<br>
-    コメント数:{{user_obj.comments_num}}<br>
-    トピック数:{{user_obj.topics_num}}
+    コメント数:{{user_obj.comments_count}}<br>
+    トピック数:{{user_obj.topics_count}}
   </OverlayPanel>
 </template>
 
@@ -32,19 +32,22 @@ export default {
               if (res.status === 200) {
                 this.user_obj = res.data
               } else {
-                console.log('取得失敗')
+                alert('取得失敗')
               }
             })
             .catch((err) => {
+              alert('サーバーエラー')
               console.log(err)
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     },
     mouseOverAction (event) {
-      this.getSummary(1)
+      this.getSummary(this.user.id)
+      console.log(this.user)
       this.$refs.op.toggle(event)
     },
     mouseLeaveAction (event) {

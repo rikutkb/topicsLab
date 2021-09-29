@@ -41,15 +41,17 @@ export default {
               if (res.status >= 200 && res.status <= 300) {
                 console.log(res)
               } else {
-                console.log('取得失敗')
+                alert('コメントの送信に失敗しました。')
               }
             })
             .catch((err) => {
+              alert('サーバエラー')
               console.log(err)
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     }
   }
