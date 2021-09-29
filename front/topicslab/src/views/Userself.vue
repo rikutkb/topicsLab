@@ -15,7 +15,8 @@
         <span class="u_name">{{user.name}}</span>
         <div v-if="isloading"><Skeleton width="30%" height="25px" class="p-mb-2"></Skeleton></div><br>
           <label class="textarea_des" for="intro">自己紹介</label><br>
-          <InputText id="intro" type="textarea" v-model="intro" />
+          <Textarea v-model="intro" :autoResize="true" rows="1" cols="30" />
+          <!--<InputText id="intro" type="textarea" v-model="intro" />-->
           <Button id="intro_btn" label="更新" v-on:click="submitIntro" />
           <div class="blank">a</div>
         <input type="file" @change="getImg" />
@@ -220,7 +221,7 @@ export default {
   font-size:13px;
 }
 /*テキストエリア*/
-#intro{
+Textarea{
   width:50%;
   height:50px;
   font-size:13px;
