@@ -59,7 +59,8 @@ export default {
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     }
   }

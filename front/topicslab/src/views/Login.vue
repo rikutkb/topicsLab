@@ -17,7 +17,7 @@
         <!--<button onclick="location.href='Register'">新規登録はこちら</button>-->
         <span style="color:red">{{message}}</span>
         <div class="p-field">
-          <Button icon="pi pi-check" label="ログイン" v-on:click="login" />
+          <Button label="ログイン" v-on:click="login" />
           <Button label="新規登録はこちら" onclick="location.href='Register'" class="p-button p-component p-button-secondary" type="button" style="margin-top:8px;" />
         </div>
         </div>
@@ -60,11 +60,14 @@ export default {
               } else if (err.response.status === 401) {
                 this.message = 'ログインに失敗しました。'
                 alert(this.message)
+              } else {
+                alert('サーバーエラー')
               }
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     }
   }

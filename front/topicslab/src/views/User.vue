@@ -77,15 +77,17 @@ export default {
                 this.user = res.data
                 this.isloading = false
               } else {
-                console.log('取得失敗')
+                alert('ユーザ取得失敗')
               }
             })
             .catch((err) => {
               console.log(err)
+              alert('サーバーエラー')
             })
         })
         .catch((err) => {
-          alert(err)
+          console.log(err)
+          alert('ネットワークエラー')
         })
     }
   }

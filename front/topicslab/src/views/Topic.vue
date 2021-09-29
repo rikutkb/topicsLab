@@ -19,7 +19,6 @@
             いいね数：{{topic_likes_count}}
           </div>
           <div class="user_name">
-              <div class="dummy_icon">a</div>
               <div class="userprofile">
                 <UserProfile :user="this.user" />
               </div>
@@ -75,15 +74,17 @@ export default {
               if (res.status >= 200 && res.status <= 300) {
                 console.log(res)
               } else {
-                console.log('取得失敗')
+                alert('トピック登録失敗')
               }
             })
             .catch((err) => {
+              alert('サーバーエラー')
               console.log(err)
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     },
     getTopic () {
@@ -100,15 +101,17 @@ export default {
                 this.isloading = false
                 this.topic_likes_count = this.topic.topic_likes_count
               } else {
-                console.log('取得失敗')
+                alert('トピック取得失敗')
               }
             })
             .catch((err) => {
+              alert('サーバーエラー')
               console.log(err)
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     },
     receiveComment (comment) {

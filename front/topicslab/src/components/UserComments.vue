@@ -28,7 +28,7 @@ export default {
   white-space:pre-wrap;
 }
 
-.topiclink {
+/*.topiclink {
 color:rgb(0, 132, 255);
 }
 .topiclink:visited{
@@ -36,6 +36,13 @@ color:rgb(0, 132, 255);
 }
 .topiclink:hover {
 color:#ff7043;
-}
+}*/
 
+.topiclink{
+  color:#a4a;
+  font-weight:bold
+}
+.topiclink:hover{
+  color:#505;
+}
 </style>

@@ -17,7 +17,7 @@
       </div>
       <input type="file" @change="getImg" />
       <div class="p-field">
-        <Button icon="pi pi-check" label="Save" v-on:click="submit" />
+        <Button label="確定" v-on:click="submit" />
         <span style="color:red">{{messages.submit}}</span>
       </div>
     </template>
@@ -91,7 +91,8 @@ export default {
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     }
   }

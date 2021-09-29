@@ -83,12 +83,13 @@ export default {
                 this.user = res.data
                 console.log(this.user)
               } else {
-                console.log('取得失敗')
+                alert('自己紹介を送信できませんでした。')
               }
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     },
     logout () {
@@ -101,11 +102,13 @@ export default {
               this.$router.push('/login')
             })
             .catch(err => {
+              alert('ログアウトできません。')
               console.log(err)
             })
         })
         .catch((err) => {
-          alert(err)
+          console.log(err)
+          alert('ネットワークエラー')
         })
     },
     withdraw () {
@@ -119,10 +122,12 @@ export default {
             })
             .catch(err => {
               console.log(err)
+              alert('サーバーエラー')
             })
         })
         .catch((err) => {
-          alert(err)
+          console.log(err)
+          alert('ネットワークエラー')
         })
     },
     getImg (e) {
@@ -143,14 +148,15 @@ export default {
           axios.post('/api/user/profile', data)
             .then((res) => {
               if (res.status === 200) {
-                console.log(res.data)
+                console.log()
               } else {
-                console.log('取得失敗')
+                alert('画像送信に失敗しました。')
               }
             })
         })
         .catch((err) => {
-          alert(err)
+          console.log(err)
+          alert('サーバーエラー')
         })
     },
     getUser () {
@@ -164,12 +170,13 @@ export default {
                 this.isloading = false
                 this.intro = res.data.intro
               } else {
-                console.log('取得失敗')
+                alert('ユーザー取得失敗')
               }
             })
         })
         .catch((err) => {
-          alert(err)
+          console.log(err)
+          alert('サーバーエラー')
         })
     }
   }
