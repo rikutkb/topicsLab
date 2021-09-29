@@ -53,7 +53,8 @@ export default {
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     },
     getAllTopics () {
@@ -74,7 +75,8 @@ export default {
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     },
     onPage (event) {

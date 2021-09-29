@@ -45,11 +45,13 @@ export default {
               }
             })
             .catch((err) => {
-              alert(err)
+              alert('サーバエラー')
+              console.log(err)
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     }
   }

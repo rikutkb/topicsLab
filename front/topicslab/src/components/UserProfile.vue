@@ -36,15 +36,18 @@ export default {
               }
             })
             .catch((err) => {
-              alert(err)
+              alert('サーバーエラー')
+              console.log(err)
             })
         })
         .catch((err) => {
-          alert(err)
+          alert('ネットワークエラー')
+          console.log(err)
         })
     },
     mouseOverAction (event) {
-      this.getSummary(1)
+      this.getSummary(this.user.id)
+      console.log(this.user)
       this.$refs.op.toggle(event)
     },
     mouseLeaveAction (event) {
