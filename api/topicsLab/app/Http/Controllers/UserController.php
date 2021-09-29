@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Topic;
 use App\Models\Comment;
+use App\Models\CommentLike;
+use App\Models\TopicLike;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -116,9 +118,18 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $user = $request->user();
-        Comment::where('user_id', $user->id)->delete();
+        CommentLike::where('user_id', $user->id)->delete();
+        TopicLike::where('user_id', $user->id)->delete();
+        Comment::where('user_id', $user->id)->get()->each(function ($comment) {
+                CommentLike::where('comment_id', $comment->id)->delete();
+                $comment->delete();
+        });
         Topic::where('user_id', $user->id)->get()->each(function ($topic) {
-            Comment::where('topic_id', $topic->id)->delete();
+            Comment::where('topic_id', $topic->id)->each(function ($comment) {
+                CommentLike::where('comment_id', $comment->id)->delete();
+                $comment->delete();
+            });
+            TopicLike::where('topic_id', $topic->id)->delete();
             $topic->delete();
         });
         $user->delete();
