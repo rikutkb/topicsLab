@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Topic;
 use App\Models\Comment;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -20,7 +19,7 @@ class UserController extends Controller
     {
         $user = $request->user();
         $user->comments = Comment::where('user_id', $user->id)->get();
-        $user->topics = Topic::where('user_id',$user->id)->get();
+        $user->topics = Topic::where('user_id', $user->id)->get();
         return $user;
     }
     public function index()
@@ -64,7 +63,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user->comments = Comment::where('user_id', $user->id)->get();
-        $user->topics = Topic::where('user_id',$user->id)->get();
+        $user->topics = Topic::where('user_id', $user->id)->get();
         return $user;
     }
     public function summary(User $user)
@@ -84,15 +83,14 @@ class UserController extends Controller
 
 
         $user = $request->user();
-        if($request->intro != null || $request->intro != ""){
+        if ($request->intro != null || $request->intro != "") {
             $user->intro = $request->intro;
         }
 
-        if($request->hasFile('file')){
-            $filename = time() . '-' .$request->file('file')->getClientOriginalName();
-            $request->file('file')->storeAs('public',$filename);
+        if ($request->hasFile('file')) {
+            $filename = time() . '-' . $request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('public', $filename);
             $user->img_path = 'storage/' . $filename;
-
         }
         $user->save();
         return $user;
@@ -119,9 +117,9 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $user = $request->user();
-        Comment::where('user_id',$user->id)->delete();
-        Topic::where('user_id',$user->id)->get()->each(function($topic){
-            Comment::where('topic_id',$topic->id)->delete();
+        Comment::where('user_id', $user->id)->delete();
+        Topic::where('user_id', $user->id)->get()->each(function ($topic) {
+            Comment::where('topic_id', $topic->id)->delete();
             $topic->delete();
         });
         $user->delete();

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\CommentLike;
 use App\Models\Topic;
-
 use Illuminate\Http\Request;
 
 class CommentLikeController extends Controller
@@ -36,7 +35,7 @@ class CommentLikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Topic $topic,Comment $comment)
+    public function store(Request $request, Topic $topic, Comment $comment)
     {
         $user = $request->user();
         $commentlike = new CommentLike();

@@ -5,12 +5,13 @@
     </div>
     <Card v-for="topic in topics" :key="topic.id">
         <template #content>
-          <span class="topic-date">投稿日：{{moment(topic.created_at)}}<img v-if="topic.img_path" :src= "'http://localhost:8000/' + topic.img_path" :width="20" /></span>
+          <span class="topic-date">投稿日：{{moment(topic.created_at)}}</span>
           <h2>
             <router-link :to="`/topic/${topic.id}`">
               {{topic.title}}
             </router-link>
           </h2>
+          <img v-if="topic.img_path" :src= "'http://localhost:8000/' + topic.img_path" :width="528" />
         </template>
     </Card>
     <Paginator :rows="10" :totalRecords="this.totalRecords" @page="onPage($event)"></Paginator>

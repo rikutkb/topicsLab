@@ -44,9 +44,9 @@ class TopicController extends Controller
         $topic->title = $request->title;
         $topic->body = $request->body;
         $topic->user()->associate($user);
-        if($request->hasFile('file')){
-            $filename = time() . '-' .$request->file('file')->getClientOriginalName();
-            $request->file('file')->storeAs('public',$filename);
+        if ($request->hasFile('file')) {
+            $filename = time() . '-' . $request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('public', $filename);
             $topic->img_path = 'storage/' . $filename;
         }
         $topic->save();
@@ -62,8 +62,8 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        $topic_obj = Topic::withCount('topic_likes')->where('id', $topic->id)->with('user')->get()->toArray();
-        $comments = Comment::withCount('comment_likes')->where('topic_id',$topic->id)->with('user')->get()->toArray();
+        $topic_obj = Topic::withCount('topicLikes')->where('id', $topic->id)->with('user')->get()->toArray();
+        $comments = Comment::withCount('commentLikes')->where('topic_id', $topic->id)->with('user')->get()->toArray();
         $topic_obj[0]["comments"] = $comments;
         return $topic_obj;
     }

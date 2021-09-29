@@ -8,18 +8,16 @@
         </div>
       </template>
       <template #content id="username">
-        <div class="dummy_img">aaa</div>
-        <span class="u_name">{{user.name}}</span>
-        <div v-if="isloading">
-          <Skeleton width="30%" height="25px" class="p-mb-2"></Skeleton><br>
+        <div class="user_img" v-if="user.img_path">
+        <img :src= "'http://localhost:8000/' + user.img_path" :width="150" />
         </div>
-        <div>
+        <div v-else class="dummy_img">aaa</div>
+        <span class="u_name">{{user.name}}</span>
+        <div v-if="isloading"><Skeleton width="30%" height="25px" class="p-mb-2"></Skeleton></div><br>
           <label class="textarea_des" for="intro">自己紹介</label><br>
           <InputText id="intro" type="textarea" v-model="intro" />
-        </div>
-        <div class="p-field">
-          <Button icon="pi pi-check" label="更新" v-on:click="submitIntro" />
-        </div>
+          <Button id="intro_btn" label="更新" v-on:click="submitIntro" />
+          <div class="blank">a</div>
         <input type="file" @change="getImg" />
         <Button icon="pi pi-check" label="アップロード" v-on:click="uploadImg" />
       </template>
@@ -184,12 +182,17 @@ export default {
     margin-right: 10px;
   }
 }
+.user_img{
+  float:left;
+  margin:0px 30px 0px 0px;
+}
 /*画像の代わり*/
 .dummy_img{
   float:left;
   margin:0px 30px 0px 0px;
   width:150px;
   height:150px;
+  color:#aaa;
   background-color:#aaa;
 }
 /*float解除用*/

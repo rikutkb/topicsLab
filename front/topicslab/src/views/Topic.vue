@@ -3,24 +3,28 @@
     <Card>
       <template #title>
         {{topic.title}}
-        <img v-if="topic.img_path" :src= "'http://localhost:8000/' + topic.img_path" :width="20" />
         <div v-if="isloading"><Skeleton height="35px" class="p-mb-2"></Skeleton></div>
       </template>
       <template #content>
         <div class="body-text">
           <div v-if="isloading"><Skeleton style="margin-bottom:5px;" height="20px" class="p-mb-2"></Skeleton></div>
           <div v-if="isloading"><Skeleton height="20px" class="p-mb-2"></Skeleton></div>
-          {{topic.body}}{{topic.topic_likes_count}}
+          {{topic.body}}<!--{{topic.topic_likes_count}}-->
         </div>
+        <img v-if="topic.img_path" :src= "'http://localhost:8000/' + topic.img_path" :width="528" />
       </template>
       <template #footer>
         <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register"/>
           <div class="topic-like">
             いいね数：{{topic_likes_count}}
           </div>
-        <div class="userprofile">
-          <UserProfile :user="this.user" />
-        </div>
+          <div class="user_name">
+              <div class="dummy_icon">a</div>
+              <div class="userprofile">
+                <UserProfile :user="this.user" />
+              </div>
+              <div class="blank">a</div>
+          </div>
       </template>
     </Card>
     <Comments :comments="this.comments" :topicId="this.topic.id"/>
@@ -137,5 +141,20 @@ export default {
 }
 .userprofile{
   clear: both;
+  text-align: right;
+}
+
+/*ダミーのアイコン*/
+.dummy_icon{
+  float: right;
+  width: 20px;
+  height: 20px;
+  color: #aaa;
+  background-color: #aaa;
+}
+/*floatを解除する用*/
+.blank{
+  clear: both;
+  color: #fff;
 }
 </style>
