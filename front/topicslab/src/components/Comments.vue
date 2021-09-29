@@ -8,11 +8,8 @@
       <div class="comment-text">
         {{comment.body}}
       </div>
-      <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register_comment(comment.id)" />
-      <div class="comment-like">
-        いいね数：{{comment.comment_likes_count}}
-      </div>
-    </Fieldset>
+      <Button icon="pi pi-heart" :label="'いいね ' + comment.comment_likes_count" class="p-button-rounded topic_like_btn" v-on:click="register_comment(comment)" />
+      </Fieldset>
   </div>
 </template>
 
@@ -29,12 +26,11 @@ export default {
     topicId: Number
   },
   methods: {
-    register_comment (CommentId) {
-      console.log('comment like')
-      console.log(CommentId)
+    register_comment (Comment) {
+      Comment.comment_likes_count++
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
-          axios.post(`/api/topic/${this.topicId}/comment/${CommentId}`)
+          axios.post(`/api/topic/${this.topicId}/comment/${Comment.id}`)
             .then((res) => {
               if (res.status >= 200 && res.status <= 300) {
                 console.log(res)

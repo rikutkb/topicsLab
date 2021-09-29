@@ -14,10 +14,7 @@
         <img v-if="topic.img_path" :src= "'http://localhost:8000/' + topic.img_path" :width="528" />
       </template>
       <template #footer>
-        <Button icon="pi pi-heart" label="いいね" class="p-button-rounded topic_like_btn" v-on:click="register"/>
-          <div class="topic-like">
-            いいね数：{{topic_likes_count}}
-          </div>
+        <Button icon="pi pi-heart" :label="'いいね ' + (topic_likes_count ? topic_likes_count : '' ) " class="p-button-rounded topic_like_btn" v-on:click="register"/>
           <div class="user_name">
               <div class="userprofile">
                 <UserProfile :user="this.user" />
@@ -66,7 +63,7 @@ export default {
   },
   methods: {
     register () {
-      console.log('topic like')
+      this.topic_likes_count++
       axios.get('/sanctum/csrf-cookie')
         .then(() => {
           axios.post(`/api/topic/${this.id}/topiclike`)
