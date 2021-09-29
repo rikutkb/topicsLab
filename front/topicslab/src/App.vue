@@ -77,7 +77,7 @@ body {
   text-decoration: none;
   font-weight: bold;
   color:white;
-  opacity:0.8;
+  opacity:1;
 }
 .r_link_btn:hover{
   opacity:0.5;
